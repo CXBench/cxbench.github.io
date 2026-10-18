@@ -1,0 +1,49 @@
+{
+  "paper": "assets/cxbench-paper.pdf",
+  "sha256": "98a59270400b061284d5363258a140d5af31ec025e7123aef6c9a4328e713024",
+  "sections": {
+    "benchmark": {
+      "pages": [3, 4, 6, 12, 13, 14, 15, 18, 19],
+      "references": ["2.1", "3", "A.3", "B.2", "C.1", "C.3-C.4", "E.3"],
+      "tables": [6, 7, 9]
+    },
+    "evaluation": {
+      "pages": [5, 6, 13, 16, 17],
+      "references": ["2.4", "B.3", "D.1-D.4"],
+      "tables": [8]
+    },
+    "results": {
+      "pages": [7, 8, 17, 19, 20, 21, 22],
+      "references": ["4.1-4.2", "D.5", "F.1", "G.1-G.2"],
+      "tables": [3, 10]
+    },
+    "case-study": {
+      "pages": [21, 22],
+      "references": ["G.4"],
+      "listing": 3,
+      "task": "INS-FLOW-010.us",
+      "agent": "gpt-5.4-mini",
+      "original_sequence_groups": [
+        "10-11",
+        "17-18",
+        "20-22",
+        "24-28",
+        "34-36",
+        "39-41"
+      ]
+    },
+    "validation": {
+      "pages": [9, 16, 21, 22, 23, 24],
+      "references": ["Limitations", "D.4", "G.3", "H.1-H.4"],
+      "tables": [4, 11, 13]
+    },
+    "reproduce": {
+      "pages": [8, 19, 20],
+      "references": ["5", "E.4", "F.3"]
+    },
+    "paper": {
+      "pages": [1],
+      "references": ["Author names, affiliations, contribution notes"]
+    }
+  }
+}

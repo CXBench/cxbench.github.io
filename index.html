@@ -27,8 +27,8 @@
     <link rel="canonical" href="https://cxbench.github.io/" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="assets/fonts/fonts.css" />
-    <link rel="stylesheet" href="style.css?v=2" />
-    <script defer src="app.js?v=2"></script>
+    <link rel="stylesheet" href="style.css?v=3" />
+    <script defer src="app.js?v=3"></script>
   </head>
   <body>
     <noscript
@@ -40,6 +40,10 @@
         }
         #navigation {
           display: flex;
+        }
+        .result-panel[hidden] {
+          display: block !important;
+          margin-top: 48px;
         }
       </style></noscript
     >
@@ -189,6 +193,14 @@
           ><span>Insurance</span><span>Healthcare</span><span>Utilities</span
           ><span>Government benefits</span>
         </div>
+        <nav class="reading-guide" aria-label="Explore the research">
+          <span>Explore the research</span>
+          <a href="#benchmark">Task & rule design ↗</a>
+          <a href="#evaluation">How grading works ↗</a>
+          <a href="#case-study">A recorded failure ↗</a>
+          <a href="#validation">Validation & sensitivity ↗</a>
+          <a href="#reproduce">Reproduce & extend ↗</a>
+        </nav>
       </section>
       <section
         class="framework-section section"
@@ -329,6 +341,516 @@
         </div>
       </section>
       <section
+        class="benchmark-section section container"
+        id="benchmark"
+        aria-labelledby="benchmark-title"
+      >
+        <div class="section-intro">
+          <p class="section-label">Inside the benchmark</p>
+          <h2 id="benchmark-title">
+            From source obligations to executable tasks
+          </h2>
+          <p>
+            The corpus contains 20 tasks per domain. Task generation and grading
+            share the same<br class="desktop-break" />
+            rule cards, registered tools, and evidence requirements.
+          </p>
+        </div>
+        <ol class="construction-flow" aria-label="Benchmark construction">
+          <li>
+            <span class="step-number">01</span>
+            <h3>Extract requirements</h3>
+            <p>
+              The authors manually extract <strong>55 obligations</strong> from
+              regulatory materials available through the Legal Information
+              Institute.
+            </p>
+          </li>
+          <li>
+            <span class="step-number">02</span>
+            <h3>Build rule cards</h3>
+            <p>
+              Deduplication yields <strong>53 rule cards</strong>, linking
+              source citations, applicability, required behavior, and observable
+              evidence.
+            </p>
+          </li>
+          <li>
+            <span class="step-number">03</span>
+            <h3>Synthesize scenarios</h3>
+            <p>
+              LLM workers use the rule cards and domain interface manifests to
+              generate task specifications and associated grading criteria.
+            </p>
+          </li>
+          <li>
+            <span class="step-number">04</span>
+            <h3>Validate & review</h3>
+            <p>
+              Structural checks and human review produce
+              <strong>120 tasks</strong>. Consistency checks and review of the
+              source meaning serve different purposes.
+            </p>
+          </li>
+        </ol>
+        <p class="source-reference">
+          <a href="assets/cxbench-paper.pdf?v=98a59270#page=6">Paper §3</a> ·
+          <a href="assets/cxbench-paper.pdf?v=98a59270#page=18"
+            >Appendix E: construction procedure</a
+          >
+        </p>
+        <div class="research-details">
+          <details id="task-anatomy" open>
+            <summary>
+              What defines a task, and who can see each part?
+              <span aria-hidden="true">+</span>
+            </summary>
+            <div class="detail-body">
+              <p
+                class="task-equation"
+                aria-label="Theta equals goal, opening message, initial state, tools, policy, and confirmation fields"
+              >
+                θ = (g, m<sub>0</sub>, s<sub>0</sub>, U, Λ, K)
+              </p>
+              <dl class="task-fields">
+                <div>
+                  <dt><span>g</span> Customer goal</dt>
+                  <dd>
+                    The intended business result against which the final state
+                    is checked.
+                  </dd>
+                </div>
+                <div>
+                  <dt>
+                    <span>m<sub>0</sub></span> Opening message
+                  </dt>
+                  <dd>
+                    The prescribed customer request that starts the interaction.
+                  </dd>
+                </div>
+                <div>
+                  <dt>
+                    <span>s<sub>0</sub></span> Initial state
+                  </dt>
+                  <dd>
+                    Business records, private customer facts, history, and
+                    drafts.
+                  </dd>
+                </div>
+                <div>
+                  <dt><span>U</span> Domain tools</dt>
+                  <dd>
+                    Registered operations for reading, checking, drafting,
+                    notifying, and submitting.
+                  </dd>
+                </div>
+                <div>
+                  <dt><span>Λ</span> Policy context</dt>
+                  <dd>
+                    Applicable requirements, source references, and grading
+                    criteria.
+                  </dd>
+                </div>
+                <div>
+                  <dt><span>K</span> Confirmation fields</dt>
+                  <dd>
+                    The draft fields the customer must review and confirm before
+                    submission.
+                  </dd>
+                </div>
+              </dl>
+              <div class="information-boundary">
+                <div>
+                  <h4>Agent observations</h4>
+                  <p>
+                    The agent receives the opening message, agent-facing policy
+                    instructions, permitted tool definitions, customer replies,
+                    and tool results. It obtains further information through
+                    interaction and authorized tool access.
+                  </p>
+                </div>
+                <div>
+                  <h4>Customer simulation</h4>
+                  <p>
+                    Private facts guide the simulator's replies and confirmation
+                    decisions. The simulator sees customer-facing messages and
+                    presented draft fields, but not tool calls. Its confirmation
+                    checks the fields in K; it does not certify process
+                    compliance.
+                  </p>
+                </div>
+              </div>
+              <p class="source-reference">
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=3"
+                  >§2.1: task specification</a
+                >
+                ·
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=12"
+                  >Appendix A.3 / Table 6: information access</a
+                >
+              </p>
+            </div>
+          </details>
+          <details id="rule-card-example">
+            <summary>
+              Worked rule card: a written-confirmation disclosure
+              <span aria-hidden="true">+</span>
+            </summary>
+            <div class="detail-body">
+              <p>
+                The banking example illustrates how a source obligation becomes
+                a trace-level criterion. The entries below summarize Table 7;
+                they are not a serialized rule-card file.
+              </p>
+              <dl class="evidence-chain">
+                <div>
+                  <dt>Source</dt>
+                  <dd>
+                    Regulation E, 12 CFR §1005.11(b)(2): written confirmation of
+                    an oral error notice.
+                  </dd>
+                </div>
+                <div>
+                  <dt>Applies when</dt>
+                  <dd>
+                    The customer gives an oral error notice and the institution
+                    requires written confirmation.
+                  </dd>
+                </div>
+                <div>
+                  <dt>Required information</dt>
+                  <dd>
+                    The institution informs the customer of the
+                    written-confirmation requirement and provides the submission
+                    address when the oral notice is given.
+                  </dd>
+                </div>
+                <div>
+                  <dt>Trace evidence</dt>
+                  <dd>
+                    The interaction records communication of both pieces of
+                    information. A correct dispute record alone cannot establish
+                    that the notice was given.
+                  </dd>
+                </div>
+                <div>
+                  <dt>Benchmark checkpoint</dt>
+                  <dd>
+                    CXBench checks that disclosure precedes the request for
+                    confirmation of the filing draft. This checkpoint is an
+                    evaluation choice, not a separate deadline in the
+                    regulation.
+                  </dd>
+                </div>
+              </dl>
+              <p class="research-callout">
+                Draft confirmation authorizes a proposed submission within
+                CXBench. Written confirmation concerns the customer's oral error
+                notice. The benchmark evaluates these two requirements
+                separately.
+              </p>
+              <p class="source-reference">
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=13"
+                  >Appendix B.2 / Table 7: source obligation and evaluation
+                  criterion</a
+                >
+              </p>
+            </div>
+          </details>
+          <details id="tool-inventory">
+            <summary>
+              Six domain systems, five categories of tools
+              <span aria-hidden="true">+</span>
+            </summary>
+            <div class="detail-body">
+              <p>
+                <strong>Read</strong> retrieves records;
+                <strong>check</strong> evaluates domain conditions;
+                <strong>draft</strong> prepares an action for review;
+                <strong>notice</strong> supports required disclosures;
+                <strong>submit</strong> commits the business-state change. Each
+                domain has 20 tasks.
+              </p>
+              <div
+                class="table-scroll"
+                tabindex="0"
+                role="region"
+                aria-label="Registered tool counts by domain"
+              >
+                <table id="tool-counts" class="research-table">
+                  <caption>
+                    Table 9. Registered tool counts include aliases. The runtime
+                    mode determines which tools the agent may invoke.
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Domain</th>
+                      <th scope="col">Read</th>
+                      <th scope="col">Check</th>
+                      <th scope="col">Draft</th>
+                      <th scope="col">Notice</th>
+                      <th scope="col">Submit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Banking</th>
+                      <td>6</td>
+                      <td>5</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>2</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Telecommunications</th>
+                      <td>5</td>
+                      <td>4</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>2</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Insurance</th>
+                      <td>6</td>
+                      <td>5</td>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>2</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Healthcare</th>
+                      <td>5</td>
+                      <td>3</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>1</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Utilities</th>
+                      <td>5</td>
+                      <td>5</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>1</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Government benefits</th>
+                      <td>5</td>
+                      <td>4</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>1</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                The utilities tool <code>submit_arrangement_or_hold</code>, for
+                example, dispatches by draft type to a payment arrangement,
+                regulatory hold, or bill dispute. The same confirmation-matching
+                mechanism applies across these business records.
+              </p>
+              <p class="source-reference">
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=14"
+                  >Appendix C.1: domain systems and tool interfaces</a
+                >
+              </p>
+            </div>
+          </details>
+          <details id="submission-modes">
+            <summary>
+              How the runtime checks submission authority
+              <span aria-hidden="true">+</span>
+            </summary>
+            <div class="detail-body">
+              <p class="sequence-line">
+                Prepare a draft <span aria-hidden="true">→</span> Confirm its
+                fields <span aria-hidden="true">→</span> Submit the matching
+                draft
+              </p>
+              <div class="information-boundary">
+                <div>
+                  <h4>Mediated submission · default</h4>
+                  <p>
+                    Submission tools are excluded from the agent's available
+                    actions. Confirmation is associated with draft content
+                    through a hash; the runtime checks the fields in K against
+                    the confirmed values before committing the action. An
+                    agent's attempted direct submission is blocked and recorded.
+                  </p>
+                </div>
+                <div>
+                  <h4>Direct submission · comparison mode</h4>
+                  <p>
+                    Submission tools are exposed to the agent and
+                    runtime-mediated submission is disabled. The agent must
+                    obtain confirmation and submit the matching draft. Changing
+                    tool availability does not automatically remove
+                    submission-specific checks from the original scoring
+                    protocol.
+                  </p>
+                </div>
+              </div>
+              <p>
+                The append-only trace records messages, tool calls and results,
+                confirmations, and submissions in order. Sequence indices link
+                judge findings to evidence; event sources distinguish an
+                agent-requested action from a runtime-initiated submission.
+              </p>
+              <p class="source-reference">
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=15"
+                  >Appendices C.3–C.4: authority, confirmation matching, and
+                  trace representation</a
+                >
+              </p>
+            </div>
+          </details>
+          <details id="construction-review">
+            <summary>
+              What do automatic checks and human review establish?
+              <span aria-hidden="true">+</span>
+            </summary>
+            <div class="detail-body">
+              <ol class="check-list">
+                <li>
+                  Every confirmation field is present in the private customer
+                  facts.
+                </li>
+                <li>
+                  Every referenced submission tool is registered in its domain.
+                </li>
+                <li>
+                  Every referenced rule identifier is supported by the grader.
+                </li>
+                <li>
+                  Every task supplies a non-empty semantic-judge checklist.
+                </li>
+              </ol>
+              <p>
+                These four structural gates establish internal consistency.
+                Three senior software-engineering experts review each rule
+                mapping for applicability, required behavior, and ordering or
+                timing constraints, resolving disagreements through discussion
+                and voting.
+              </p>
+              <p>
+                Industry collaborators contribute scenarios, interview feedback,
+                rule review, and trace annotations. The authors remain
+                responsible for interpreting regulatory sources. Engineering
+                review and industry participation do not constitute independent
+                legal validation.
+              </p>
+              <p class="source-reference">
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=18"
+                  >Appendix E.3: structural gates</a
+                >
+                ·
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=19"
+                  >Review responsibilities and scope</a
+                >
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+      <section
+        class="evaluation-section section"
+        id="evaluation"
+        aria-labelledby="evaluation-title"
+      >
+        <div class="container">
+          <div class="section-intro">
+            <p class="section-label">Evaluation semantics</p>
+            <h2 id="evaluation-title">One execution, two verdicts</h2>
+            <p>
+              The final business state answers whether the task succeeded.<br
+                class="desktop-break"
+              />
+              The recorded interaction answers whether the encoded process
+              requirements were met.
+            </p>
+          </div>
+          <div class="verdict-grid">
+            <article>
+              <span class="verdict-label">Outcome</span>
+              <h3>Is the business result correct?</h3>
+              <p>
+                A domain-specific checker compares the final records with the
+                customer goal and relevant reference facts. A filed dispute must
+                concern the intended transaction and matching fields.
+              </p>
+              <div class="verdict-formula">O = outcome check</div>
+            </article>
+            <article>
+              <span class="verdict-label">Process</span>
+              <h3>Do both grading components pass?</h3>
+              <p>
+                R requires all applicable deterministic hard rules to pass; J is
+                the reconciled LLM-judge verdict. Ordering, permissions, and
+                confirmation consistency complement semantic assessment.
+              </p>
+              <div class="verdict-formula">P = R ∧ J</div>
+            </article>
+            <article>
+              <span class="verdict-label">Combined result</span>
+              <h3>Which successes survive process checks?</h3>
+              <p>
+                <strong>Both-pass</strong> requires outcome and process success.
+                A <strong>false-pass</strong> achieves the business goal but
+                fails at least one process component.
+              </p>
+              <div class="verdict-formula">
+                <span>Both-pass: O ∧ P</span><span>False-pass: O ∧ ¬P</span>
+              </div>
+            </article>
+          </div>
+          <div class="judge-detail">
+            <div>
+              <h3>Every finding points back to evidence</h3>
+              <p>
+                The judge returns an overall verdict, a rationale, and findings
+                with a requirement identifier, pass/fail judgment, severity,
+                trace sequence reference, and evidence. Any failed finding
+                forces the judge component to fail, including a finding labeled
+                minor.
+              </p>
+            </div>
+            <dl class="rule-categories">
+              <div>
+                <dt>Pipeline gates</dt>
+                <dd>Draft, confirmation, and submission order.</dd>
+              </div>
+              <div>
+                <dt>Domain ordering</dt>
+                <dd>Required precedence between business operations.</dd>
+              </div>
+              <div>
+                <dt>Disclosure gates</dt>
+                <dd>
+                  Required information before designated confirmation events.
+                </dd>
+              </div>
+              <div>
+                <dt>Semantic prohibitions</dt>
+                <dd>
+                  Unsupported promises, prohibited secret collection, and
+                  unlawful disconnection threats.
+                </dd>
+              </div>
+            </dl>
+          </div>
+          <p class="source-reference">
+            <a href="assets/cxbench-paper.pdf?v=98a59270#page=13"
+              >Table 8: rule categories</a
+            >
+            ·
+            <a href="assets/cxbench-paper.pdf?v=98a59270#page=16"
+              >Appendix D: grading and verdict composition</a
+            >
+          </p>
+        </div>
+      </section>
+      <section
         class="results-section section container"
         id="results"
         aria-labelledby="results-title"
@@ -362,6 +884,99 @@
           False-passes account for <strong>80.07%</strong> of outcome-passing
           executions (466 / 582).
         </p>
+        <div class="record-partition">
+          <div
+            class="partition-bar"
+            role="img"
+            aria-label="Of 840 retained records, 116 pass outcome and process, 466 pass outcome but fail process, and 258 fail outcome."
+          >
+            <span class="partition-both" style="flex: 116"></span
+            ><span class="partition-false" style="flex: 466"></span
+            ><span class="partition-failed" style="flex: 258"></span>
+          </div>
+          <div class="partition-legend">
+            <span
+              ><i class="partition-both" aria-hidden="true"></i>116
+              both-pass</span
+            ><span
+              ><i class="partition-false" aria-hidden="true"></i>466
+              false-pass</span
+            ><span
+              ><i class="partition-failed" aria-hidden="true"></i>258
+              outcome-fail</span
+            >
+          </div>
+          <p>
+            The first two groups make up all 582 outcome-passing records:
+            <strong>582 = 116 + 466</strong>. The headline false-pass rate uses
+            all 840 records; the conditional 80.07% uses only the 582
+            outcome-passes.
+          </p>
+        </div>
+        <details class="protocol-detail">
+          <summary>
+            Evaluation setup, retention policy, and statistical tests
+            <span aria-hidden="true">+</span>
+          </summary>
+          <div class="detail-body">
+            <dl class="protocol-grid">
+              <div>
+                <dt>Execution</dt>
+                <dd>
+                  One retained run per model–task pair; 120 per model and 840 in
+                  total. Main results use mediated submission.
+                </dd>
+              </div>
+              <div>
+                <dt>Customer simulator</dt>
+                <dd>
+                  <code>gpt-5.4-mini</code>, fixed across evaluated agents.
+                </dd>
+              </div>
+              <div>
+                <dt>Baseline judge</dt>
+                <dd>
+                  <code>gpt-5.6-sol</code>, combined with deterministic hard
+                  rules.
+                </dd>
+              </div>
+              <div>
+                <dt>Retention & retries</dt>
+                <dd>
+                  Retries are triggered only by network failures. Outcome
+                  failures, process violations, and dialogue or tool-budget
+                  exhaustion remain in the denominator.
+                </dd>
+              </div>
+              <div>
+                <dt>Uncertainty</dt>
+                <dd>
+                  Per-model both-pass uses a 95% Wilson interval. Paired model
+                  comparisons use two-sided exact McNemar tests with Holm
+                  correction.
+                </dd>
+              </div>
+              <div>
+                <dt>Configuration scope</dt>
+                <dd>
+                  Unless otherwise specified, generation parameters and
+                  dialogue/tool budgets use their default settings. These
+                  records do not estimate first-attempt reliability or
+                  repeated-run variability.
+                </dd>
+              </div>
+            </dl>
+            <p class="source-reference">
+              <a href="assets/cxbench-paper.pdf?v=98a59270#page=17"
+                >Appendix D.5: denominators and metrics</a
+              >
+              ·
+              <a href="assets/cxbench-paper.pdf?v=98a59270#page=19"
+                >Appendix F.1: evaluation setup</a
+              >
+            </p>
+          </div>
+        </details>
         <div class="result-tabs" role="tablist" aria-label="Results views">
           <button
             id="result-tab-models"
@@ -398,7 +1013,12 @@
           aria-labelledby="result-tab-models"
           tabindex="0"
         >
-          <div class="table-scroll">
+          <div
+            class="table-scroll"
+            tabindex="0"
+            role="region"
+            aria-label="Per-model results"
+          >
             <table>
               <caption>
                 Per-model results over 120 retained records. The 95% Wilson
@@ -471,6 +1091,17 @@
             (two-sided exact McNemar tests, p &lt; 0.05). The reported rates do
             not establish a complete statistical ordering.
           </p>
+          <div class="finding-strip">
+            <h3>The criterion changes the observed ordering</h3>
+            <p>
+              GLM-5.1 and DeepSeek-v4-flash tie at
+              <strong>77.50% outcome-pass</strong>, but reach
+              <strong>21.67%</strong> and <strong>13.33% both-pass</strong>.
+              GPT-5.4 has a lower outcome rate (64.17%) yet a higher both-pass
+              rate (20.83%) than DeepSeek-v4-flash. These are descriptive
+              comparisons.
+            </p>
+          </div>
         </div>
         <div
           id="result-panel-domains"
@@ -506,6 +1137,80 @@
             94.29% pooled outcome-pass but 5.71% both-pass; government benefits
             reaches 84.29% and 4.29%, respectively.
           </p>
+          <div
+            class="table-scroll domain-result-table"
+            tabindex="0"
+            role="region"
+            aria-label="Pooled domain results"
+          >
+            <table id="domain-results" class="research-table">
+              <caption>
+                Table 10. Each domain pools 7 models × 20 tasks = 140 retained
+                executions. Percentages use all 140 records.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Domain</th>
+                  <th scope="col">Outcome-pass</th>
+                  <th scope="col">Both-pass</th>
+                  <th scope="col">False-pass</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Banking</th>
+                  <td>94.29%</td>
+                  <td><strong>5.71%</strong><small>8 / 140</small></td>
+                  <td>88.57%</td>
+                </tr>
+                <tr>
+                  <th scope="row">Government benefits</th>
+                  <td>84.29%</td>
+                  <td><strong>4.29%</strong><small>6 / 140</small></td>
+                  <td>80.00%</td>
+                </tr>
+                <tr>
+                  <th scope="row">Healthcare</th>
+                  <td>13.57%</td>
+                  <td><strong>2.14%</strong><small>3 / 140</small></td>
+                  <td>11.43%</td>
+                </tr>
+                <tr>
+                  <th scope="row">Insurance</th>
+                  <td>80.71%</td>
+                  <td><strong>17.86%</strong><small>25 / 140</small></td>
+                  <td>62.86%</td>
+                </tr>
+                <tr>
+                  <th scope="row">Telecommunications</th>
+                  <td>67.14%</td>
+                  <td><strong>26.43%</strong><small>37 / 140</small></td>
+                  <td>40.71%</td>
+                </tr>
+                <tr>
+                  <th scope="row">Utilities</th>
+                  <td>75.71%</td>
+                  <td><strong>26.43%</strong><small>37 / 140</small></td>
+                  <td>49.29%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="finding-strip">
+            <h3>Different domains expose different bottlenecks</h3>
+            <p>
+              Banking and government benefits have large outcome–process gaps.
+              Healthcare has low outcome success as well as the lowest both-pass
+              rate. Telecommunications and utilities share the highest both-pass
+              rate, <strong>26.43%</strong>, while retaining substantial
+              false-pass rates.
+            </p>
+            <a
+              class="source-reference"
+              href="assets/cxbench-paper.pdf?v=98a59270#page=20"
+              >Appendix G.1 / Table 10 ↗</a
+            >
+          </div>
         </div>
         <div
           id="result-panel-rules"
@@ -543,6 +1248,31 @@
             denominators vary by rule. Of 466 false-passes, 329 are rejected
             only by the LLM judge, 38 only by hard rules, and 99 by both.
           </p>
+          <div
+            class="detection-breakdown"
+            aria-label="Complementary detection among 466 false-passes"
+          >
+            <div><strong>329</strong><span>Judge only</span></div>
+            <div><strong>38</strong><span>Hard rules only</span></div>
+            <div><strong>99</strong><span>Both components</span></div>
+          </div>
+          <div class="finding-strip">
+            <h3>35 of 53 hard rules fail at least once</h3>
+            <p>
+              The insurance requirement
+              <code>policy_summary_before_authority_check</code> fails in
+              <strong>47 false-pass records</strong> (10.09% of the 466). It
+              requires a successful policy-summary read before checking reporter
+              authority and comes from the encoded institutional workflow. Other
+              requirements may also fail in those same records; 47 is not an
+              exclusive attribution to this rule.
+            </p>
+            <a
+              class="source-reference"
+              href="assets/cxbench-paper.pdf?v=98a59270#page=20"
+              >Appendix G.2: rule-level failure analysis ↗</a
+            >
+          </div>
         </div>
         <noscript
           ><p>
@@ -561,11 +1291,129 @@
           >
         </div>
       </section>
-      <section class="notes-section section">
+      <section
+        class="case-section section"
+        id="case-study"
+        aria-labelledby="case-title"
+      >
+        <div class="container">
+          <div class="section-intro">
+            <p class="section-label">A recorded execution</p>
+            <h2 id="case-title">
+              A confirmed draft can still be a false-pass.
+            </h2>
+            <p>
+              Insurance task <code>INS-FLOW-010.us</code> ·
+              <code>gpt-5.4-mini</code> · mediated submission<br
+                class="desktop-break"
+              />Selected events from Listing 3, retaining the paper's original
+              sequence numbers.
+            </p>
+          </div>
+          <div class="case-layout">
+            <ol class="trace-timeline">
+              <li>
+                <span class="trace-seq">10–11</span>
+                <div>
+                  <h3>Read the policy summary</h3>
+                  <p>The agent retrieves the policy context.</p>
+                </div>
+              </li>
+              <li>
+                <span class="trace-seq">17–18</span>
+                <div>
+                  <h3>Check the business risk</h3>
+                  <p>The agent checks total-loss or storage risk.</p>
+                </div>
+              </li>
+              <li>
+                <span class="trace-seq">20–22</span>
+                <div>
+                  <h3>Create the first draft</h3>
+                  <p><code>draft_001</code> proposes a total-loss review.</p>
+                </div>
+              </li>
+              <li>
+                <span class="trace-seq">24–28</span>
+                <div>
+                  <h3>Record required notices</h3>
+                  <p>
+                    Acknowledgment and no-promise notices are recorded for
+                    <code>draft_001</code>.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="trace-seq">34–36</span>
+                <div>
+                  <h3>Correct the draft</h3>
+                  <p>The agent creates a revised <code>draft_002</code>.</p>
+                </div>
+              </li>
+              <li>
+                <span class="trace-seq">39–41</span>
+                <div>
+                  <h3>Confirm and submit</h3>
+                  <p>
+                    The customer confirms <code>draft_002</code>, and the
+                    runtime submits the matching draft.
+                  </p>
+                </div>
+              </li>
+            </ol>
+            <aside
+              class="case-verdict"
+              aria-label="Evaluation of the recorded insurance trace"
+            >
+              <p class="verdict-tag">Outcome pass · Process fail</p>
+              <h3>What the final state misses</h3>
+              <dl>
+                <div>
+                  <dt>Outcome checker · pass</dt>
+                  <dd>
+                    The submitted review matches the required task fields.
+                  </dd>
+                </div>
+                <div>
+                  <dt>Hard rules · fail</dt>
+                  <dd>The reporter-authority check is missing.</dd>
+                </div>
+                <div>
+                  <dt>LLM judge · fail</dt>
+                  <dd>
+                    Existing-claim context is missing before the business check.
+                    Required notices are not sufficiently associated with, or
+                    carried forward to, the corrected draft.
+                  </dd>
+                </div>
+              </dl>
+              <p class="case-conclusion">
+                Matching confirmation and successful submission establish only
+                part of the required process. Both grading components identify
+                additional failures in the recorded trace.
+              </p>
+            </aside>
+          </div>
+          <p class="source-reference">
+            <a href="assets/cxbench-paper.pdf?v=98a59270#page=21"
+              >Appendix G.4: annotated false-pass</a
+            >
+            ·
+            <a href="assets/cxbench-paper.pdf?v=98a59270#page=22"
+              >Listing 3: events and verdict explanation</a
+            >
+          </p>
+        </div>
+      </section>
+      <section
+        class="notes-section section"
+        id="validation"
+        aria-labelledby="validation-title"
+      >
         <div class="notes-layout container">
           <div>
             <p class="section-label">Evaluation notes</p>
-            <h2>
+            <h2 id="validation-title">
               Interpreting<br />
               the results
             </h2>
@@ -576,7 +1424,7 @@
             </p>
           </div>
           <div class="notes-list">
-            <details open>
+            <details>
               <summary>
                 Hybrid grading and trace evidence <span>+</span>
               </summary>
@@ -587,8 +1435,31 @@
                 requirements with trace-linked findings. Rule-only and LLM-only
                 scores are diagnostic views, not formal CXBench results.
               </p>
+              <p>
+                The findings-consistency check reconciles the judge's overall
+                verdict with its findings. A failed finding forces failure; a
+                non-empty list of all passing findings yields a pass; an empty
+                list preserves the original verdict. Unsupported hard-rule
+                identifiers raise a grading error rather than silently becoming
+                an agent failure.
+              </p>
+              <p>
+                Reconciliation changes two raw judge verdicts in the 840
+                baseline records, both for gpt-5.4-mini. Both already fail
+                outcome and hard-rule checks, so aggregate both-pass (116) and
+                false-pass (466) counts are unchanged.
+              </p>
+              <p class="source-reference">
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=16"
+                  >Appendix D.4: consistency rules</a
+                >
+                ·
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=23"
+                  >Appendix H.3: observed effect</a
+                >
+              </p>
             </details>
-            <details>
+            <details open>
               <summary>Submission-control sensitivity <span>+</span></summary>
               <p>
                 For gpt-5.4, the original protocol reports 20.83% both-pass with
@@ -596,11 +1467,69 @@
                 Removing submission-mechanism checks from both grading
                 components gives 20.83% versus 18.33%.
               </p>
+              <div
+                class="table-scroll"
+                tabindex="0"
+                role="region"
+                aria-label="Submission-control sensitivity"
+              >
+                <table
+                  id="submission-results"
+                  class="research-table compact-table"
+                >
+                  <caption>
+                    Table 4 / Table 11. Rates over 120 tasks for gpt-5.4. The
+                    excluded-check row is rescoring, not an additional execution
+                    mode.
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Condition</th>
+                      <th scope="col">Outcome</th>
+                      <th scope="col">Both-pass</th>
+                      <th scope="col">False-pass</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Mediated-submit</th>
+                      <td>64.17%</td>
+                      <td>20.83%</td>
+                      <td>43.33%</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Direct-submit</th>
+                      <td>67.50%</td>
+                      <td>0.83%</td>
+                      <td>66.67%</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Direct, checks excluded</th>
+                      <td>67.50%</td>
+                      <td>18.33%</td>
+                      <td>49.17%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <p>
                 The adjusted difference is −2.50 percentage points (bootstrap
                 95% CI [−10.00, 5.00]; exact McNemar p = 0.677639). This is
                 rescoring of recorded traces; the agent and simulator were not
                 rerun. The original gap is scoring-sensitive.
+              </p>
+              <p>
+                With the same excluded-check scoring applied to both modes, 12
+                tasks pass in both, 13 only in mediated-submit, 10 only in
+                direct-submit, and 85 in neither. The original protocol includes
+                checks that specifically penalize direct submission; its larger
+                gap should be interpreted with that scoring choice in view.
+              </p>
+              <p class="source-reference">
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=21"
+                  >Appendix G.3 / Table 11: scoring conditions and paired
+                  counts</a
+                >
               </p>
             </details>
             <details>
@@ -621,6 +1550,84 @@
                 during calibration and do not establish held-out accuracy or
                 inter-rater reliability.
               </p>
+              <div
+                class="table-scroll"
+                tabindex="0"
+                role="region"
+                aria-label="Baseline judge compared with expert labels"
+              >
+                <table
+                  class="research-table compact-table"
+                  id="expert-comparison"
+                >
+                  <caption>
+                    Table 13. One expert's labels on 120 development traces from
+                    gpt-5.4-mini. Process pass is the positive class.
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Expert label</th>
+                      <th scope="col">Judge pass</th>
+                      <th scope="col">Judge fail</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Pass</th>
+                      <td>23 true positives</td>
+                      <td>4 false negatives</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Fail</th>
+                      <td>10 false positives</td>
+                      <td>83 true negatives</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                The judge comparison excludes deepseek-v4-flash and holds
+                outcomes and deterministic rule results fixed. No previously
+                strict model ordering reverses. Provider-side system
+                instructions cannot be verified as identical, so differences
+                cannot be attributed solely to model choice.
+              </p>
+              <p class="source-reference">
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=22"
+                  >Appendix H.1: judge configuration</a
+                >
+                ·
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=23"
+                  >Appendix H.4 / Table 13: expert review</a
+                >
+              </p>
+            </details>
+            <details>
+              <summary>
+                Sensitivity to individual hard rules
+                <span aria-hidden="true">+</span>
+              </summary>
+              <p>
+                The study removes each of the 35 hard rules with observed
+                failures in turn, holding outcomes, saved judge verdicts, and
+                the other hard rules fixed. Among the six models other than
+                gpt-4o-mini, only three removals increase any model's both-pass
+                count.
+              </p>
+              <p>
+                The largest change removes
+                <code>policy_summary_before_authority_check</code>: qwen3.6-plus
+                rises from 18 to 24 both-passes (+5.00 percentage points).
+                Removing <code>read_before_check</code> or
+                <code>risk_check_before_step_up</code> changes a model's rate by
+                at most 0.83 points. No previously strict ordering reverses;
+                formal results retain the full hybrid grader.
+              </p>
+              <p class="source-reference">
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=23"
+                  >Appendix H.2: individual-rule sensitivity</a
+                >
+              </p>
             </details>
             <details>
               <summary>Scope and limitations <span>+</span></summary>
@@ -632,8 +1639,173 @@
                 changing regulations, and different workflow assumptions require
                 renewed review of the encoded requirements.
               </p>
+              <p>
+                Source citations make the authors' interpretations inspectable;
+                they do not establish legal correctness or completeness. Expert
+                calibration covers one agent model and one trace-level
+                annotator. Hybrid agreement measures consistency between grading
+                configurations, not accuracy against independent labels.
+              </p>
+              <p class="source-reference">
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=9"
+                  >Limitations</a
+                >
+                ·
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=24"
+                  >Scope of validation evidence</a
+                >
+              </p>
             </details>
           </div>
+        </div>
+      </section>
+      <section
+        class="reproduce-section section container"
+        id="reproduce"
+        aria-labelledby="reproduce-title"
+      >
+        <div class="section-intro">
+          <p class="section-label">Reproducibility & extension</p>
+          <h2 id="reproduce-title">
+            Three ways to revisit the reported results
+          </h2>
+          <p>
+            New interactions, fresh judgments, and recomputed statistics answer
+            different questions.
+          </p>
+        </div>
+        <div class="reproduce-grid">
+          <article>
+            <span class="step-number">01</span>
+            <h3>Re-execute tasks</h3>
+            <p>
+              Invoke the agent and customer simulator through the runtime again.
+              The resulting interaction, trace, and verdicts may differ from the
+              retained execution.
+            </p>
+            <dl>
+              <dt>Changes</dt>
+              <dd>Execution evidence and potentially the grades.</dd>
+            </dl>
+          </article>
+          <article>
+            <span class="step-number">02</span>
+            <h3>Re-grade saved traces</h3>
+            <p>
+              Apply a specified grading configuration to the recorded
+              interaction and final state. Fresh LLM judgments may produce
+              different findings.
+            </p>
+            <dl>
+              <dt>Held fixed</dt>
+              <dd>
+                The execution evidence. This is how the judge-configuration
+                comparison is conducted.
+              </dd>
+            </dl>
+          </article>
+          <article>
+            <span class="step-number">03</span>
+            <h3>Reaggregate statistics</h3>
+            <p>
+              Recompute counts, rates, intervals, and paired comparisons from
+              saved outcome and process verdicts, without additional model
+              calls.
+            </p>
+            <dl>
+              <dt>Deterministic for</dt>
+              <dd>
+                The same retained records, grades, and statistical procedures.
+              </dd>
+            </dl>
+          </article>
+        </div>
+        <p class="source-reference">
+          <a href="assets/cxbench-paper.pdf?v=98a59270#page=20"
+            >Appendix F.3: reproduction procedures</a
+          >
+          ·
+          <a href="assets/data/results.json" download
+            >Download the values reported on this page</a
+          >
+        </p>
+        <div class="research-details extension-details">
+          <details>
+            <summary>
+              What is needed to add a new domain?
+              <span aria-hidden="true">+</span>
+            </summary>
+            <div class="detail-body">
+              <ol class="check-list">
+                <li>
+                  Extract source obligations into rule cards with applicability
+                  and evidence requirements.
+                </li>
+                <li>
+                  Define the business-state representation and implement the
+                  domain tools.
+                </li>
+                <li>
+                  Map requirements to existing trace predicates, adding checks
+                  where necessary.
+                </li>
+                <li>
+                  Generate task and grading specifications, then perform
+                  structural validation and semantic review.
+                </li>
+              </ol>
+              <p>
+                The interaction loop, trace format, submission controls, verdict
+                composition, and judge protocol are shared. Domain-specific
+                states, tools, and unsupported checks require additional
+                engineering. Establish supported operations and required
+                evidence before generating scenarios.
+              </p>
+              <p class="source-reference">
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=19"
+                  >Appendix E.4: domain extension guidance</a
+                >
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              How does CXBench relate to earlier benchmarks?
+              <span aria-hidden="true">+</span>
+            </summary>
+            <div class="detail-body">
+              <p>
+                <strong>Interactive tool-agent evaluation.</strong> tau-bench
+                and tau2-bench evaluate conversational agents using domain
+                tools, outcome checks, and checks on required response
+                information. The tau-bench authors already note that a correct
+                outcome can violate policy. CXBench reports the process
+                dimension separately and measures outcome-pass/process-fail
+                cases explicitly.
+              </p>
+              <p>
+                <strong>Procedure-following evaluation.</strong> SOPBench,
+                SOP-Bench, and SOP-Maze examine procedural requirements,
+                including action permissibility, database outcomes, procedure
+                completeness, and expert-informed workflows. CXBench connects
+                cited regulatory requirements to scenario-specific trace
+                evidence, alongside a shared submission-control mechanism.
+              </p>
+              <p>
+                <strong>Regulatory evaluation and trace judging.</strong>
+                LegalBench, LiCoEval, and legal-critical testing examine legal
+                reasoning, license compliance, or law-derived requirements.
+                CXBench applies regulation-linked criteria to interactive
+                customer-service traces using deterministic rules and
+                checklist-based semantic judgments.
+              </p>
+              <p class="source-reference">
+                <a href="assets/cxbench-paper.pdf?v=98a59270#page=8"
+                  >§5: related work and full references</a
+                >
+              </p>
+            </div>
+          </details>
         </div>
       </section>
       <section
@@ -681,8 +1853,7 @@
   year = {2026},
   url = {https://cxbench.github.io/},
   note = {Research manuscript}
-}</pre
-            >
+}</pre>
             <span class="sr-only" id="copy-status" aria-live="polite"></span>
           </div>
         </div>
@@ -691,6 +1862,51 @@
           benchmark implementation is maintained in the linked GitHub
           repository.
         </p>
+        <details class="author-details">
+          <summary>
+            Authors, affiliations, and contribution notes
+            <span aria-hidden="true">+</span>
+          </summary>
+          <div class="detail-body">
+            <dl class="affiliation-list">
+              <div>
+                <dt>Lero, University of Limerick, Ireland</dt>
+                <dd>Boxi Yu, Liting Lin, Lionel Briand</dd>
+              </div>
+              <div>
+                <dt>The Chinese University of Hong Kong, Shenzhen, China</dt>
+                <dd>Yuzhong Zhang, Zhenfeng Su</dd>
+              </div>
+              <div>
+                <dt>Xi'an Jiaotong University, China</dt>
+                <dd>Linfu Xi, Yinghan Yao</dd>
+              </div>
+              <div>
+                <dt>Peking University, China</dt>
+                <dd>Shitao Chen</dd>
+              </div>
+              <div>
+                <dt>South China University of Technology, China</dt>
+                <dd>Yang Cao</dd>
+              </div>
+              <div>
+                <dt>Genesys Cloud Services Inc.</dt>
+                <dd>Emir Muñoz</dd>
+              </div>
+            </dl>
+            <p>
+              Boxi Yu, Yuzhong Zhang, and Zhenfeng Su contributed equally.
+              Corresponding author: Boxi Yu (<a href="mailto:boxi.yu@lero.ie"
+                >boxi.yu@lero.ie</a
+              >).
+            </p>
+            <p class="source-reference">
+              <a href="assets/cxbench-paper.pdf?v=98a59270#page=1"
+                >Author information in the supplied manuscript</a
+              >
+            </p>
+          </div>
+        </details>
       </section>
     </main>
     <footer class="site-footer container">

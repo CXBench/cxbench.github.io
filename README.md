@@ -8,6 +8,13 @@ and appendices, six original paper figures with zoom and PDF downloads, exact
 model results, domain and rule heatmaps, and a narrated 1080p introduction
 with synchronized English and Chinese captions.
 
+Research details cover task information boundaries, rule-card construction,
+registered tool counts, submission authority, hybrid verdict composition,
+experimental retention policy, per-domain results, an annotated recorded
+insurance trace, sensitivity analyses, reproduction procedures, and domain
+extension. Section and appendix links point into the current supplied PDF;
+`production/content-sources.json` records the source pages for these additions.
+
 ## Content provenance
 
 - The original research and figure source is `cxbench_arr.zip`, supplied on

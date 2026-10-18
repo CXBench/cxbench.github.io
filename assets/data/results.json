@@ -1,5 +1,5 @@
 {
-  "source": "cxbench_arr.zip supplied 2026-10-18; active manuscript main results table and pooled-domain appendix table",
+  "source": "cxbench_arxiv.pdf supplied 2026-10-18; Tables 3, 4, 9, 10, 11, 13 and Appendices E-H; checked against the published 24-page manuscript",
   "protocol": {
     "grader": "hybrid",
     "tasks": 120,
@@ -141,7 +141,36 @@
     "direct_checks_excluded_both_pct": 18.33,
     "adjusted_difference_pp": -2.5,
     "adjusted_difference_bootstrap_ci_pp": [-10, 5],
-    "adjusted_mcnemar_p": 0.677639
+    "adjusted_mcnemar_p": 0.677639,
+    "conditions": [
+      {
+        "label": "Mediated-submit",
+        "outcome_pct": 64.17,
+        "process_pct": 21.67,
+        "both_pct": 20.83,
+        "false_pass_pct": 43.33
+      },
+      {
+        "label": "Direct-submit",
+        "outcome_pct": 67.5,
+        "process_pct": 0.83,
+        "both_pct": 0.83,
+        "false_pass_pct": 66.67
+      },
+      {
+        "label": "Direct-submit (checks excluded)",
+        "outcome_pct": 67.5,
+        "process_pct": 20.0,
+        "both_pct": 18.33,
+        "false_pass_pct": 49.17
+      }
+    ],
+    "paired_counts_checks_excluded": {
+      "both_modes_pass": 12,
+      "mediated_only": 13,
+      "direct_only": 10,
+      "neither_passes": 85
+    }
   },
   "judge_sensitivity": {
     "records": 720,
@@ -158,5 +187,47 @@
     "false_positive": 10,
     "true_negative": 83,
     "held_out": false
+  },
+  "paper": {
+    "file": "assets/cxbench-paper.pdf",
+    "sha256": "98a59270400b061284d5363258a140d5af31ec025e7123aef6c9a4328e713024",
+    "pages": 24
+  },
+  "construction": {
+    "extracted_obligations": 55,
+    "rule_cards": 53,
+    "tasks_per_domain": 20,
+    "source": "Section 3; Appendix E"
+  },
+  "registered_tools": {
+    "source": "Table 9, page 14; counts include aliases",
+    "columns": ["read", "check", "draft", "notice", "submit"],
+    "domains": {
+      "Banking": [6, 5, 3, 4, 2],
+      "Telecommunications": [5, 4, 2, 3, 2],
+      "Insurance": [6, 5, 3, 3, 2],
+      "Healthcare": [5, 3, 1, 2, 1],
+      "Utilities": [5, 5, 4, 3, 1],
+      "Government benefits": [5, 4, 2, 2, 1]
+    }
+  },
+  "rule_failure_analysis": {
+    "source": "Appendix G.2",
+    "hard_rules": 53,
+    "hard_rules_with_failures": 35,
+    "policy_summary_before_authority_check_false_pass_records": 47,
+    "exclusive_attribution": false
+  },
+  "hard_rule_sensitivity": {
+    "source": "Appendix H.2",
+    "removed_one_at_a_time": 35,
+    "reported_subset_excludes": "gpt-4o-mini",
+    "largest_change": {
+      "rule_removed": "policy_summary_before_authority_check",
+      "model": "qwen3.6-plus",
+      "both_count_before": 18,
+      "both_count_after": 24,
+      "difference_pp": 5.0
+    }
   }
 }
