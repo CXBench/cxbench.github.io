@@ -1,0 +1,26 @@
+{
+  "source": "cxbench_arr.zip supplied 2026-10-18; active manuscript main results table and pooled-domain appendix table",
+  "protocol": {"grader": "hybrid", "tasks": 120, "models": 7, "domains": 6, "records": 840, "records_per_model": 120, "records_per_domain": 140, "customer_simulator": "gpt-5.4-mini", "judge": "gpt-5.6-sol", "includes_task_failures": true, "retained_runs_per_model_task_pair": 1},
+  "aggregate": {"outcome_pass": 582, "both_pass": 116, "false_pass": 466, "outcome_fail": 258},
+  "models": [
+    {"name":"glm-5.1","outcome":93,"both":26,"false_pass":67,"ci":[15.24,29.85]},
+    {"name":"gpt-5.4","outcome":77,"both":25,"false_pass":52,"ci":[14.53,28.95]},
+    {"name":"gpt-5.4-mini","outcome":74,"both":18,"false_pass":56,"ci":[9.70,22.47]},
+    {"name":"qwen3.6-plus","outcome":85,"both":18,"false_pass":67,"ci":[9.70,22.47]},
+    {"name":"deepseek-v4-flash","outcome":93,"both":16,"false_pass":77,"ci":[8.38,20.56]},
+    {"name":"qwen3.5-plus","outcome":85,"both":10,"false_pass":75,"ci":[4.59,14.66]},
+    {"name":"gpt-4o-mini","outcome":75,"both":3,"false_pass":72,"ci":[0.85,7.09]}
+  ],
+  "domains": [
+    {"id":"banking","name":"Banking","outcome":132,"both":8,"false_pass":124,"title":"A filed dispute is not the whole story.","description":"Applicable notices and their timing remain visible in the trace, even when the final dispute record is correct."},
+    {"id":"telecom","name":"Telecommunications","outcome":94,"both":37,"false_pass":57,"title":"Customer requests, with process attached.","description":"Domain-specific tools and confirmation requirements connect telecommunications workflows to the same outcome-and-process evaluation."},
+    {"id":"insurance","name":"Insurance","outcome":113,"both":25,"false_pass":88,"title":"Sequence matters before submission.","description":"A recurring encoded workflow requires a successful policy-summary read before the reporter-authority check. Missing or reversed events can fail the process."},
+    {"id":"healthcare","name":"Healthcare","outcome":19,"both":3,"false_pass":16,"title":"Completion is a challenge of its own.","description":"Healthcare has the lowest pooled outcome and both-pass rates. Separating the two measures distinguishes outcome failures from successful outcomes with process violations."},
+    {"id":"utilities","name":"Utilities","outcome":106,"both":37,"false_pass":69,"title":"Check the interaction, not just the action.","description":"Utilities workflows use domain tools and trace-linked requirements within the shared runtime. Even here, outcome success substantially exceeds both-pass."},
+    {"id":"benefits","name":"Government benefits","outcome":118,"both":6,"false_pass":112,"title":"A successful outcome can conceal a large gap.","description":"Government benefits reaches 84.29% outcome-pass, while just 4.29% of retained evaluations pass both the outcome and process checks."}
+  ],
+  "false_pass_detection": {"judge_only":329,"hard_rules_only":38,"both":99},
+  "submission_comparison": {"model":"gpt-5.4","records":120,"recorded_traces_rescored":true,"agent_or_simulator_rerun":false,"mediated_both_pct":20.83,"direct_both_pct":0.83,"direct_checks_excluded_both_pct":18.33,"adjusted_difference_pp":-2.50,"adjusted_difference_bootstrap_ci_pp":[-10,5],"adjusted_mcnemar_p":0.677639},
+  "judge_sensitivity":{"records":720,"excluded_model":"deepseek-v4-flash","baseline_both_pct":13.89,"alternative_both_pct":14.72,"hybrid_agreement_pct":92.22,"kendall_tau_b":0.9661},
+  "expert_comparison":{"development_traces":120,"true_positive":23,"false_negative":4,"false_positive":10,"true_negative":83,"held_out":false}
+}

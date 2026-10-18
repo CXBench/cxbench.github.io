@@ -1,0 +1,6 @@
+_site/
+.DS_Store
+__pycache__/
+.venv/
+production/work/
+*.log

@@ -1,0 +1,49 @@
+--- a/cxbench_arr.tex
++++ b/cxbench_arr.tex
+@@ -49,7 +49,7 @@
+   rulecolor=\color{gray!40},
+   backgroundcolor=\color{gray!4},
+   breaklines=true,
+-  breakatwhitespace=true,
++  breakatwhitespace=false,
+   showstringspaces=false,
+   columns=fullflexible,
+   keepspaces=true,
+--- a/appendix.tex
++++ b/appendix.tex
+@@ -514,7 +514,7 @@
+ reporter authority follows the institutional workflow used
+ for the insurance tasks.
+ We encode it as
+-\texttt{policy\_summary\_before\_authority\_check}.
++\texttt{policy\_\allowbreak{}summary\_\allowbreak{}before\_\allowbreak{}authority\_\allowbreak{}check}.
+ This ordering is not explicitly prescribed by the cited
+ regulatory provisions.
+ A failure therefore indicates non-adherence to the encoded
+@@ -620,7 +620,7 @@
+     \label{tab:domain-tools-app}
+     \centering
+     \footnotesize
+-    \setlength{\tabcolsep}{5pt}
++    \setlength{\tabcolsep}{3pt}
+     \begin{tabular}{@{}lccccc@{}}
+         \toprule
+         Domain & Read & Check & Draft & Notice & Submit \\
+@@ -859,7 +859,7 @@
+ and agreement between confirmed and submitted fields.
+ The grading configuration identifies the applicable
+ hard rules through
+-\texttt{policy.grading\_policy.deterministic\_hard\_rules}.
++\texttt{policy.\allowbreak{}grading\_\allowbreak{}policy.\allowbreak{}deterministic\_\allowbreak{}hard\_\allowbreak{}rules}.
+ The current grader enforces 53 hard rules
+ across the benchmark.
+ 
+@@ -1813,7 +1813,7 @@
+     Process pass is the positive class.}
+     \label{tab:human-reference}
+     \footnotesize
+-    \setlength{\tabcolsep}{8pt}
++    \setlength{\tabcolsep}{4pt}
+     \begin{tabular}{@{}lrr@{}}
+         \toprule
+         & \code{gpt-5.6-sol}: Pass

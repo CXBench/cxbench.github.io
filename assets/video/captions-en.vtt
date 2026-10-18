@@ -1,0 +1,73 @@
+WEBVTT
+
+00:00:00.800 --> 00:00:04.808
+Imagine two AI agents helping a customer dispute a transaction.
+
+00:00:05.128 --> 00:00:09.400
+Both file the correct dispute. Their final database records are identical.
+
+00:00:09.720 --> 00:00:13.776
+Does that mean both agents succeeded? The answer depends on the path they took.
+
+00:00:15.676 --> 00:00:20.548
+In this example, the bank requires written confirmation of an oral error notice.
+
+00:00:20.868 --> 00:00:26.292
+One agent explains the requirement and gives the submission address. The other omits that notice.
+
+00:00:26.612 --> 00:00:33.260
+Both obtain draft confirmation. Both reach the same outcome. But only one satisfies the required disclosure.
+
+00:00:35.160 --> 00:00:41.688
+CXBench separates two questions. Did the agent achieve the customer goal? And did it follow the required process?
+
+00:00:42.008 --> 00:00:47.600
+Overall success requires both. A correct outcome with a failed process is a false-pass.
+
+00:00:47.920 --> 00:00:52.288
+It is precisely the kind of failure that outcome-only evaluation would accept.
+
+00:00:54.188 --> 00:00:59.900
+Rule cards connect source provisions to applicable behavior and observable trace evidence.
+
+00:01:00.220 --> 00:01:09.220
+Deterministic rules check ordering and authority. An LLM judge checks semantic obligations, such as disclosures and unsupported promises.
+
+00:01:09.540 --> 00:01:16.140
+The process passes only when both components pass. Each finding can be inspected against the recorded interaction.
+
+00:01:18.040 --> 00:01:23.896
+In the default runtime, the agent prepares a draft. The customer confirms the required fields.
+
+00:01:24.216 --> 00:01:32.328
+The runtime submits only when the draft still matches that confirmation. This is a benchmark control, distinct from the disclosure obligation.
+
+00:01:32.648 --> 00:01:38.912
+Controlling submission helps enforce selected constraints. It does not replace evaluation of the whole process.
+
+00:01:40.812 --> 00:01:48.996
+The study covers one hundred and twenty tasks, six regulated domains, and seven models: eight hundred and forty retained executions.
+
+00:01:49.316 --> 00:01:55.628
+Five hundred and eighty-two pass the outcome check. Only one hundred and sixteen pass both outcome and process.
+
+00:01:55.948 --> 00:02:03.148
+The remaining four hundred and sixty-six are false-passes. That is about eighty percent of the runs that outcome-only scoring accepts.
+
+00:02:05.048 --> 00:02:09.272
+The evaluation criterion also changes the observed model ordering.
+
+00:02:09.592 --> 00:02:20.104
+DeepSeek and GLM tie on outcome success, yet their both-pass rates differ. GPT five point four has a lower outcome rate, but a higher both-pass rate than DeepSeek.
+
+00:02:20.424 --> 00:02:25.656
+These are descriptive comparisons. The study does not establish a complete statistical ranking.
+
+00:02:27.556 --> 00:02:36.172
+Among the false-passes, the semantic judge alone catches three hundred and twenty-nine. Hard rules alone catch thirty-eight. Both catch ninety-nine.
+
+00:02:36.492 --> 00:02:46.932
+These complementary checks measure the requirements encoded in the benchmark, not legal certification. Judge validation and repeated-run uncertainty remain important limits.
+
+00:02:47.252 --> 00:02:54.716
+CXBench asks us to evaluate the outcome, and examine the process. Explore the paper at cxbench dot github dot io.

@@ -1,0 +1,61 @@
+{
+  "duration_seconds": 175.816,
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "narration_language": "en",
+  "subtitle_languages": [
+    "en",
+    "zh"
+  ],
+  "chapters": [
+    {
+      "start": 0.0,
+      "end": 14.876,
+      "id": "question",
+      "title": "The destination is only half the story"
+    },
+    {
+      "start": 14.876,
+      "end": 34.36000000000001,
+      "id": "traces",
+      "title": "Same outcome. Different process."
+    },
+    {
+      "start": 34.36000000000001,
+      "end": 53.388000000000005,
+      "id": "axes",
+      "title": "Separate outcome from process"
+    },
+    {
+      "start": 53.388000000000005,
+      "end": 77.23999999999998,
+      "id": "grader",
+      "title": "Make every requirement inspectable"
+    },
+    {
+      "start": 77.23999999999998,
+      "end": 100.01199999999994,
+      "id": "runtime",
+      "title": "Separate preparation from authority"
+    },
+    {
+      "start": 100.01199999999994,
+      "end": 124.24799999999992,
+      "id": "results",
+      "title": "The gap becomes visible"
+    },
+    {
+      "start": 124.24799999999992,
+      "end": 146.7559999999999,
+      "id": "models",
+      "title": "A different criterion changes the picture"
+    },
+    {
+      "start": 146.7559999999999,
+      "end": 175.8159999999999,
+      "id": "closing",
+      "title": "Evaluate the outcome. Examine the process."
+    }
+  ]
+}
