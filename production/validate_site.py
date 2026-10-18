@@ -1,5 +1,6 @@
 """Check published scientific counts, local links, subtitles, and video metadata."""
 from html.parser import HTMLParser
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -52,6 +53,20 @@ for path in [ROOT / 'index.html', ROOT / 'assets/video/transcript.html']:
         assert target.exists(), f'Missing asset: {target}'
 
 metadata = json.loads((ROOT / 'assets/video/metadata.json').read_text())
+figures = json.loads((ROOT / 'assets/figures/manifest.json').read_text())
+assert {figure['paper_figure'] for figure in figures} == set(range(1, 7))
+for figure in figures:
+    source = ROOT / figure['pdf']
+    assert source.exists() and (ROOT / figure['image']).exists()
+    assert hashlib.sha256(source.read_bytes()).hexdigest() == figure['source_sha256']
+    assert figure['modified'] is False
+table = json.loads((ROOT / 'assets/figures/table3-source.json').read_text())
+assert table['page'] == 8 and table['table'] == 3
+assert hashlib.sha256((ROOT / table['source']).read_bytes()).hexdigest() == table['source_sha256']
+assert len(metadata['figure_sources']) == 7
+for source in metadata['figure_sources']:
+    assert (ROOT / 'assets/video' / source).resolve().is_file()
+assert (ROOT / 'assets/video' / metadata['visual_theme']).resolve().is_file()
 assert metadata['width'] == 1920 and metadata['height'] == 1080
 assert 120 <= metadata['duration_seconds'] <= 210
 assert (ROOT / 'assets/video/cxbench-introduction.mp4').stat().st_size > 1_000_000
@@ -70,4 +85,4 @@ for language in ['en', 'zh']:
         previous_end = seconds(end)
     tracks.append(timestamps)
 assert tracks[0] == tracks[1], 'Subtitle tracks are not synchronized'
-print('PASS: counts, denominators, local links, 1080p metadata, and 24 synchronized bilingual cues.')
+print('PASS: counts, denominators, local links, original figure provenance, 1080p metadata, and 24 synchronized bilingual cues.')

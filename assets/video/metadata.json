@@ -4,10 +4,7 @@
   "height": 1080,
   "fps": 30,
   "narration_language": "en",
-  "subtitle_languages": [
-    "en",
-    "zh"
-  ],
+  "subtitle_languages": ["en", "zh"],
   "chapters": [
     {
       "start": 0.0,
@@ -57,5 +54,16 @@
       "id": "closing",
       "title": "Evaluate the outcome. Examine the process."
     }
-  ]
+  ],
+  "visual_theme": "../theme.json",
+  "figure_sources": [
+    "../figures/figure1.webp",
+    "../figures/figure2.webp",
+    "../figures/figure3.webp",
+    "../figures/figure4.webp",
+    "../figures/domain_heatmap.webp",
+    "../figures/rule_failure_heatmap.webp",
+    "../figures/table3.webp"
+  ],
+  "visual_treatment": "Original manuscript figures, cropped details, smooth camera moves, and animated annotations."
 }

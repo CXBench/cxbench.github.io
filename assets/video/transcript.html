@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>CXBench — Film transcript</title>
+    <title>CXBench | Video transcript</title>
     <link rel="stylesheet" href="../fonts/fonts.css" />
-    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="../../style.css?v=2" />
     <style>
       main {
-        max-width: 850px;
-        padding: 60px 24px;
+        max-width: 800px;
+        padding: 55px 24px;
         margin: auto;
       }
       section {
@@ -17,36 +17,52 @@
         border-top: 1px solid var(--line);
       }
       h1 {
-        font-size: 64px;
+        font-size: 42px;
+        margin: 30px 0 20px;
       }
       h2 {
-        font-size: 38px;
+        font-size: 25px;
+        margin-bottom: 24px;
+      }
+      p {
+        font-size: 15px;
+        line-height: 1.8;
+        margin-bottom: 18px;
       }
       .translation {
         color: var(--muted);
         font-size: 14px;
       }
-      section p {
-        margin-bottom: 15px;
-      }
       .translation + p {
-        margin-top: 30px;
+        margin-top: 28px;
+      }
+      .credits {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      a {
+        color: var(--blue);
+      }
+      .lead {
+        margin-bottom: 40px;
+      }
+      @media (max-width: 500px) {
+        h1 {
+          font-size: 32px;
+        }
       }
     </style>
   </head>
   <body>
     <main>
-      <a class="inline-link" href="../../#film">← Back to CXBench</a>
-      <p class="eyebrow" style="margin-top: 40px">
-        FILM TRANSCRIPT / EN + 中文
-      </p>
-      <h1>Follow the whole path.</h1>
-      <p>
-        An original animated introduction to CXBench. English narration with
-        English and Chinese captions.
+      <a href="../../#film">← Back to CXBench</a>
+      <h1>CXBench: a visual introduction</h1>
+      <p class="lead">
+        Original paper figures with animated annotations. English narration and
+        synchronized English / Chinese subtitles.
       </p>
       <section>
-        <p class="eyebrow">01 / 00:00:00</p>
+        <p class="section-label">01 / 00:00:00</p>
         <h2>The destination is only half the story</h2>
         <p>Imagine two AI agents helping a customer dispute a transaction.</p>
         <p lang="zh" class="translation">
@@ -68,7 +84,7 @@
         </p>
       </section>
       <section>
-        <p class="eyebrow">02 / 00:00:14</p>
+        <p class="section-label">02 / 00:00:14</p>
         <h2>Same outcome. Different process.</h2>
         <p>
           In this example, the bank requires written confirmation of an oral
@@ -93,7 +109,7 @@
         </p>
       </section>
       <section>
-        <p class="eyebrow">03 / 00:00:34</p>
+        <p class="section-label">03 / 00:00:34</p>
         <h2>Separate outcome from process</h2>
         <p>
           CXBench separates two questions. Did the agent achieve the customer
@@ -119,7 +135,7 @@
         </p>
       </section>
       <section>
-        <p class="eyebrow">04 / 00:00:53</p>
+        <p class="section-label">04 / 00:00:53</p>
         <h2>Make every requirement inspectable</h2>
         <p>
           Rule cards connect source provisions to applicable behavior and
@@ -144,7 +160,7 @@
         </p>
       </section>
       <section>
-        <p class="eyebrow">05 / 00:01:17</p>
+        <p class="section-label">05 / 00:01:17</p>
         <h2>Separate preparation from authority</h2>
         <p>
           In the default runtime, the agent prepares a draft. The customer
@@ -170,7 +186,7 @@
         </p>
       </section>
       <section>
-        <p class="eyebrow">06 / 00:01:40</p>
+        <p class="section-label">06 / 00:01:40</p>
         <h2>The gap becomes visible</h2>
         <p>
           The study covers one hundred and twenty tasks, six regulated domains,
@@ -195,7 +211,7 @@
         </p>
       </section>
       <section>
-        <p class="eyebrow">07 / 00:02:04</p>
+        <p class="section-label">07 / 00:02:04</p>
         <h2>A different criterion changes the picture</h2>
         <p>
           The evaluation criterion also changes the observed model ordering.
@@ -219,7 +235,7 @@
         </p>
       </section>
       <section>
-        <p class="eyebrow">08 / 00:02:26</p>
+        <p class="section-label">08 / 00:02:26</p>
         <h2>Evaluate the outcome. Examine the process.</h2>
         <p>
           Among the false-passes, the semantic judge alone catches three hundred
@@ -247,11 +263,12 @@
           阅读论文。
         </p>
       </section>
-      <p class="footnote">
-        Figures and claims follow the supplied October 2026 manuscript.
-        Narration is synthesized with the Andrew neural voice. The animation
-        uses original geometric graphics; no 3Blue1Brown artwork, recordings, or
-        voice are used.
+      <p class="credits">
+        Figures 1–6 and Table 3 are from the supplied October 2026 manuscript.
+        The video uses cropped views, zooms, and animated annotations; full
+        original figures are available on the
+        <a href="../../#framework">project website</a>. Narration is synthesized
+        with the Andrew neural voice.
       </p>
     </main>
   </body>

@@ -1,0 +1,8 @@
+{
+  "source": "assets/cxbench-paper.pdf",
+  "source_sha256": "28ea0c0abefd446e9ed00ab687f344e23f4d2545cc1a5ad909b3a58009a8da79",
+  "page": 8,
+  "table": 3,
+  "crop_points": [65, 68, 531, 194],
+  "content_modified": false
+}

@@ -1,172 +1,197 @@
 "use strict";
 
+const video = document.querySelector("#intro-video");
+const videoFrame = document.querySelector(".video-frame");
+video.controls = false;
+videoFrame.classList.add("has-start");
+document.querySelector(".video-start").addEventListener("click", async () => {
+  video.controls = true;
+  videoFrame.classList.remove("has-start");
+  video.focus();
+  try {
+    await video.play();
+  } catch {
+    // Native controls remain available if playback is interrupted or deferred.
+  }
+});
+
 const menu = document.querySelector(".menu-toggle");
 const navigation = document.querySelector("#navigation");
-menu.addEventListener("click", () => {
-  const expanded = menu.getAttribute("aria-expanded") !== "true";
-  menu.setAttribute("aria-expanded", String(expanded));
-  menu.setAttribute(
-    "aria-label",
-    expanded ? "Close navigation" : "Open navigation",
-  );
-  navigation.classList.toggle("open", expanded);
-});
-navigation.addEventListener("click", (event) => {
-  if (!event.target.closest("a")) return;
+function closeMenu() {
   menu.setAttribute("aria-expanded", "false");
   menu.setAttribute("aria-label", "Open navigation");
   navigation.classList.remove("open");
+}
+menu.addEventListener("click", () => {
+  const open = menu.getAttribute("aria-expanded") !== "true";
+  menu.setAttribute("aria-expanded", String(open));
+  menu.setAttribute(
+    "aria-label",
+    open ? "Close navigation" : "Open navigation",
+  );
+  navigation.classList.toggle("open", open);
+});
+navigation.addEventListener("click", (event) => {
+  if (event.target.closest("a")) closeMenu();
 });
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && navigation.classList.contains("open")) {
-    menu.click();
+    closeMenu();
     menu.focus();
   }
 });
 
-document.querySelectorAll("[data-lens]").forEach((button) => {
-  button.addEventListener("click", () => {
-    const hybrid = button.dataset.lens === "hybrid";
-    document
-      .querySelectorAll("[data-lens]")
-      .forEach((item) =>
-        item.setAttribute("aria-pressed", String(item === button)),
-      );
-    document.querySelector("#trace-pair").classList.toggle("hybrid", hybrid);
-    document.querySelector(".verdict-a").textContent = hybrid
-      ? "Both-pass"
-      : "Outcome pass";
-    document.querySelector(".verdict-b").textContent = hybrid
-      ? "False-pass"
-      : "Outcome pass";
-    document.querySelector("#example-insight").textContent = hybrid
-      ? "Trace B is a false-pass: the business outcome is correct, but the required disclosure is missing."
-      : "Both traces reach the same final state. An outcome-only check accepts both.";
-  });
+const figures = {
+  example: {
+    file: "figure1",
+    number: 1,
+    caption: "Two traces with the same final state.",
+    alt: "Two dispute-filing traces with the same final state; the second omits the required written-confirmation notice.",
+    note: "In the banking example, the written-confirmation disclosure follows Regulation E when applicable. Draft confirmation is a separate CXBench runtime control.",
+  },
+  pipeline: {
+    file: "figure2",
+    number: 2,
+    caption: "The CXBench evaluation pipeline.",
+    alt: "The customer simulator and agent interact with a task environment, mediated runtime, and tools; the resulting trace and final state feed separate outcome and hybrid process graders.",
+    note: "The simulator supplies customer facts and confirmations. The runtime checks the confirmation fields before submission; the grader then evaluates the recorded execution.",
+  },
+  grading: {
+    file: "figure3",
+    number: 3,
+    caption: "From regulatory requirements to process evaluation.",
+    alt: "Cited statute, rule card, required trace event, and grader condition, followed by the conjunction of deterministic rules and a semantic trace judge.",
+    note: "Formal process verdicts require both deterministic hard rules and the LLM judge to pass. The source figure illustrates how a missing disclosure yields a false-pass despite a correct outcome.",
+  },
+  task: {
+    file: "figure4",
+    number: 4,
+    caption: "Task specification, tools, and grading configuration.",
+    alt: "An executable task specification with customer goals, business states, tool interfaces, confirmation fields, and grading requirements.",
+    note: "Each task packages its customer context, allowed tools, initial business state, confirmation contract, and outcome and process requirements.",
+  },
+};
+
+function connectTabs(selector, activate) {
+  const tabs = Array.from(document.querySelectorAll(selector));
+  function select(tab) {
+    for (const item of tabs) {
+      item.setAttribute("aria-selected", String(item === tab));
+      item.tabIndex = item === tab ? 0 : -1;
+    }
+    activate(tab);
+  }
+  for (const tab of tabs) {
+    tab.addEventListener("click", () => select(tab));
+    tab.addEventListener("keydown", (event) => {
+      let next = tabs.indexOf(tab);
+      if (["ArrowRight", "ArrowDown"].includes(event.key)) next++;
+      else if (["ArrowLeft", "ArrowUp"].includes(event.key)) next--;
+      else if (event.key === "Home") next = 0;
+      else if (event.key === "End") next = tabs.length - 1;
+      else return;
+      event.preventDefault();
+      const target = tabs[(next + tabs.length) % tabs.length];
+      select(target);
+      target.focus();
+    });
+  }
+}
+
+connectTabs("[data-figure]", (tab) => {
+  const figure = figures[tab.dataset.figure];
+  const image = document.querySelector("#framework-image");
+  image.src = `assets/figures/${figure.file}.webp`;
+  image.alt = `Paper Figure ${figure.number}: ${figure.alt}`;
+  image.removeAttribute("width");
+  image.removeAttribute("height");
+  const link = document.querySelector("#framework-image-link");
+  link.href = image.src;
+  link.dataset.caption = `Figure ${figure.number}. ${figure.caption}`;
+  const number = document.createElement("strong");
+  number.textContent = `Figure ${figure.number}.`;
+  document
+    .querySelector("#framework-caption")
+    .replaceChildren(number, ` ${figure.caption}`);
+  document.querySelector("#framework-pdf").href =
+    `assets/figures/${figure.file}.pdf`;
+  document.querySelector("#framework-note").textContent = figure.note;
+  document
+    .querySelector("#framework-panel")
+    .setAttribute("aria-labelledby", tab.id);
+});
+connectTabs("[data-result]", (tab) => {
+  for (const panel of document.querySelectorAll(".result-panel")) {
+    panel.hidden = panel.id !== tab.getAttribute("aria-controls");
+  }
 });
 
-const percent = (value, denominator) =>
-  `${((value / denominator) * 100).toFixed(2)}%`;
-fetch("assets/data/results.json")
-  .then((response) => {
-    if (!response.ok) throw new Error("Results unavailable");
-    return response.json();
-  })
-  .then((data) => {
-    const chart = document.querySelector("#model-chart");
-    function renderChart(sort = "both") {
-      chart.replaceChildren();
-      const rows = [...data.models].sort((a, b) =>
-        sort === "name" ? a.name.localeCompare(b.name) : b[sort] - a[sort],
-      );
-      for (const model of rows) {
-        const row = document.createElement("div");
-        row.className = "model-row";
-        const name = document.createElement("span");
-        name.className = "model-name";
-        name.textContent = model.name;
-        const bars = document.createElement("div");
-        bars.className = "model-bars";
-        for (const metric of ["outcome", "both"]) {
-          const bar = document.createElement("div");
-          bar.className = `model-bar ${metric}`;
-          bar.style.width = percent(
-            model[metric],
-            data.protocol.records_per_model,
-          );
-          const label = document.createElement("span");
-          label.textContent = percent(
-            model[metric],
-            data.protocol.records_per_model,
-          );
-          bar.setAttribute(
-            "aria-label",
-            `${metric === "outcome" ? "Outcome-pass" : "Both-pass"}: ${label.textContent}`,
-          );
-          bar.append(label);
-          bars.append(bar);
-        }
-        row.append(name, bars);
-        chart.append(row);
-      }
-    }
-    renderChart();
-    document
-      .querySelector("#result-sort")
-      .addEventListener("change", (event) => renderChart(event.target.value));
-
-    const tabs = [...document.querySelectorAll("[data-domain]")];
-    function selectDomain(tab) {
-      const domain = data.domains.find(
-        (item) => item.id === tab.dataset.domain,
-      );
-      for (const item of tabs) {
-        item.setAttribute("aria-selected", String(item === tab));
-        item.tabIndex = item === tab ? 0 : -1;
-      }
-      document
-        .querySelector("#domain-panel")
-        .setAttribute("aria-labelledby", tab.id);
-      document.querySelector("#domain-kicker").textContent =
-        `${domain.name.toUpperCase()} / 140 EVALUATIONS`;
-      document.querySelector("#domain-title").textContent = domain.title;
-      document.querySelector("#domain-description").textContent =
-        domain.description;
-      for (const metric of ["outcome", "both"]) {
-        const value = percent(domain[metric], data.protocol.records_per_domain);
-        document.querySelector(`#domain-${metric}`).textContent = value;
-        document.querySelector(`#domain-${metric}-bar`).style.width = value;
-      }
-    }
-    tabs.forEach((tab, index) => {
-      tab.addEventListener("click", () => selectDomain(tab));
-      tab.addEventListener("keydown", (event) => {
-        let next;
-        if (["ArrowRight", "ArrowDown"].includes(event.key))
-          next = (index + 1) % tabs.length;
-        if (["ArrowLeft", "ArrowUp"].includes(event.key))
-          next = (index + tabs.length - 1) % tabs.length;
-        if (event.key === "Home") next = 0;
-        if (event.key === "End") next = tabs.length - 1;
-        if (next === undefined) return;
-        event.preventDefault();
-        selectDomain(tabs[next]);
-        tabs[next].focus();
-      });
-    });
-  })
-  .catch(() => {
-    document.querySelector("#model-chart").textContent =
-      "The chart could not load. Exact results are available in the table below.";
-    document.querySelector(".result-detail").open = true;
-    document.querySelector("#result-sort").disabled = true;
-  });
-
-document
-  .querySelector("#copy-citation")
-  .addEventListener("click", async (event) => {
-    const button = event.currentTarget;
-    const citation = document.querySelector("#citation");
-    try {
-      await navigator.clipboard.writeText(citation.textContent);
-      button.textContent = "Copied";
-      document.querySelector("#copy-status").textContent =
-        "Citation copied to clipboard.";
-    } catch {
-      const selection = window.getSelection();
-      const range = document.createRange();
-      range.selectNodeContents(citation);
-      selection.removeAllRanges();
-      selection.addRange(range);
-      button.textContent = "Text selected";
-      document.querySelector("#copy-status").textContent =
-        "Citation selected. Use your browser copy command.";
-    }
-    setTimeout(() => {
-      button.textContent = "Copy BibTeX";
-    }, 2500);
-  });
-
-if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  document.querySelector(".trajectory").pauseAnimations();
+const dialog = document.querySelector("#figure-dialog");
+const canvas = document.querySelector(".dialog-canvas");
+const zoom = document.querySelector("#figure-zoom");
+let figureTrigger;
+function resetZoom() {
+  canvas.classList.remove("zoomed");
+  zoom.setAttribute("aria-pressed", "false");
+  zoom.textContent = "Zoom in";
+  canvas.scrollTo(0, 0);
 }
+for (const link of document.querySelectorAll("[data-lightbox]")) {
+  link.addEventListener("click", (event) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+      return;
+    event.preventDefault();
+    figureTrigger = link;
+    document.querySelector("#dialog-image").src = link.href;
+    document.querySelector("#dialog-image").alt = link.querySelector("img").alt;
+    document.querySelector("#dialog-caption").textContent =
+      link.dataset.caption;
+    document.querySelector("#figure-download").href = link.href;
+    resetZoom();
+    dialog.showModal();
+    document.querySelector("#figure-close").focus();
+  });
+}
+zoom.addEventListener("click", () => {
+  const zoomed = canvas.classList.toggle("zoomed");
+  zoom.setAttribute("aria-pressed", String(zoomed));
+  zoom.textContent = zoomed ? "Fit to window" : "Zoom in";
+});
+document
+  .querySelector("#figure-close")
+  .addEventListener("click", () => dialog.close());
+dialog.addEventListener("click", (event) => {
+  if (event.target !== dialog) return;
+  const bounds = dialog.getBoundingClientRect();
+  if (
+    event.clientX < bounds.left ||
+    event.clientX > bounds.right ||
+    event.clientY < bounds.top ||
+    event.clientY > bounds.bottom
+  )
+    dialog.close();
+});
+dialog.addEventListener("close", () => figureTrigger?.focus());
+
+const copyButton = document.querySelector("#copy-citation");
+copyButton.addEventListener("click", async () => {
+  const citation = document.querySelector("#citation");
+  try {
+    await navigator.clipboard.writeText(citation.textContent);
+    copyButton.textContent = "Copied";
+    document.querySelector("#copy-status").textContent =
+      "Citation copied to clipboard.";
+  } catch {
+    const range = document.createRange();
+    range.selectNodeContents(citation);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    copyButton.textContent = "Selected";
+    document.querySelector("#copy-status").textContent =
+      "Citation selected. Use your keyboard to copy.";
+  }
+  window.setTimeout(() => {
+    copyButton.textContent = "Copy";
+  }, 2500);
+});

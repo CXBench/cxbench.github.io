@@ -1,0 +1,68 @@
+[
+  {
+    "id": "figure1",
+    "paper_figure": 1,
+    "source": "figure1.pdf",
+    "source_sha256": "7aee3f7751eebd974a5f53addba053ecf5511662a17760846e87165d01c33225",
+    "width": 2600,
+    "height": 1463,
+    "image": "assets/figures/figure1.webp",
+    "pdf": "assets/figures/figure1.pdf",
+    "modified": false
+  },
+  {
+    "id": "figure2",
+    "paper_figure": 2,
+    "source": "figure2.pdf",
+    "source_sha256": "de10ad88c9c267d25a9be554973bf420642542d2121d803e881328bc39812b27",
+    "width": 2600,
+    "height": 1569,
+    "image": "assets/figures/figure2.webp",
+    "pdf": "assets/figures/figure2.pdf",
+    "modified": false
+  },
+  {
+    "id": "figure3",
+    "paper_figure": 3,
+    "source": "figure3.pdf",
+    "source_sha256": "7b4b5cb0748c794e1fd32fe82a3b860b352c40f98e50a414318f687ad12967fe",
+    "width": 2600,
+    "height": 867,
+    "image": "assets/figures/figure3.webp",
+    "pdf": "assets/figures/figure3.pdf",
+    "modified": false
+  },
+  {
+    "id": "figure4",
+    "paper_figure": 4,
+    "source": "figure4.pdf",
+    "source_sha256": "e0ace047c6c72fa928920defdb35f9ec5ce32a28852a8984a16d961ae2786ab2",
+    "width": 2600,
+    "height": 1463,
+    "image": "assets/figures/figure4.webp",
+    "pdf": "assets/figures/figure4.pdf",
+    "modified": false
+  },
+  {
+    "id": "domain_heatmap",
+    "paper_figure": 5,
+    "source": "domain_heatmap.pdf",
+    "source_sha256": "17a1ca2980709cfee3a370d9d515726bcdf4cad635d25e1c800cda135c400767",
+    "width": 2600,
+    "height": 779,
+    "image": "assets/figures/domain_heatmap.webp",
+    "pdf": "assets/figures/domain_heatmap.pdf",
+    "modified": false
+  },
+  {
+    "id": "rule_failure_heatmap",
+    "paper_figure": 6,
+    "source": "rule_failure_heatmap.pdf",
+    "source_sha256": "675b24b772f3eb9f8860024f80bcb9ccf904dd4e47335036f558192e11da6189",
+    "width": 2600,
+    "height": 1676,
+    "image": "assets/figures/rule_failure_heatmap.webp",
+    "pdf": "assets/figures/rule_failure_heatmap.pdf",
+    "modified": false
+  }
+]
