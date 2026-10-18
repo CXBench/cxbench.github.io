@@ -10,12 +10,12 @@ with synchronized English and Chinese captions.
 
 ## Content provenance
 
-- The research source is `cxbench_arr.zip`, supplied on 2026-10-18. Its checksum
-  and entry point are recorded in `production/provenance.json`.
-- `assets/cxbench-paper.pdf` is compiled from the supplied preprint entry point.
-  `production/paper-layout.patch` records line-break and table-spacing
-  adjustments that prevent long appendix identifiers from crossing columns.
-  Scientific content is unchanged.
+- The original research and figure source is `cxbench_arr.zip`, supplied on
+  2026-10-18. Its checksum is recorded in `production/provenance.json`.
+- `assets/cxbench-paper.pdf` is an unchanged copy of the user-supplied
+  `cxbench_arxiv.pdf` (24 pages, named authors). Its checksum is recorded in
+  `production/provenance.json`. The earlier `production/paper-layout.patch`
+  is retained as history and is not applied to the current PDF.
 - The six figure PDFs in `assets/figures/` are unchanged copies from the
   supplied manuscript. `manifest.json` records their checksums, figure numbers,
   and full-resolution WebP derivatives. Table 3 is cropped from page 8 of the
@@ -27,9 +27,10 @@ with synchronized English and Chinese captions.
   diagnostic views, not formal benchmark scores.
 - `assets/data/results.json` records counts, denominators, intervals,
   sensitivity results, and provenance. No experiments were rerun for this site.
-- The supplied paper lists anonymous authors. The website retains that status
-  and makes no claim about venue acceptance.
-- Benchmark implementation and raw traces are not included in this repository.
+- Author names and BibTeX follow the current supplied PDF. The website makes
+  no claim about venue acceptance or an assigned arXiv identifier.
+- The benchmark code links point to [CXBench/cxbench](https://github.com/CXBench/cxbench).
+  Implementation and raw traces are not included in this website repository.
 
 The submission-control comparison is rescoring of recorded traces, with its
 sensitivity to submission-specific checks retained. The expert comparison

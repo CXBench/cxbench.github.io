@@ -1,6 +1,6 @@
 {
   "source": "assets/cxbench-paper.pdf",
-  "source_sha256": "28ea0c0abefd446e9ed00ab687f344e23f4d2545cc1a5ad909b3a58009a8da79",
+  "source_sha256": "98a59270400b061284d5363258a140d5af31ec025e7123aef6c9a4328e713024",
   "page": 8,
   "table": 3,
   "crop_points": [65, 68, 531, 194],

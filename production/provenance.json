@@ -2,7 +2,14 @@
   "manuscript_archive": "cxbench_arr.zip",
   "supplied_date": "2026-10-18",
   "sha256": "b66d3ad728962e9d1d62f58752526fbf38c904759efd7bc719457ca25e85a5f1",
-  "paper_entry_point": "arxiv.tex",
-  "paper_layout_patch": "production/paper-layout.patch",
-  "scientific_content_changed": false
+  "scientific_content_changed": false,
+  "published_pdf": {
+    "source_filename": "cxbench_arxiv.pdf",
+    "supplied_date": "2026-10-18",
+    "sha256": "98a59270400b061284d5363258a140d5af31ec025e7123aef6c9a4328e713024",
+    "pages": 24,
+    "author_version": "named",
+    "copy_mode": "verbatim"
+  },
+  "code_repository": "https://github.com/CXBench/cxbench"
 }
