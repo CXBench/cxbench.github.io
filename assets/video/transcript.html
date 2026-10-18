@@ -1,1 +1,258 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CXBench — Film transcript</title><link rel="stylesheet" href="../fonts/fonts.css"><link rel="stylesheet" href="../../style.css"><style>main{max-width:850px;padding:60px 24px;margin:auto}section{padding:35px 0;border-top:1px solid var(--line)}h1{font-size:64px}h2{font-size:38px}.translation{color:var(--muted);font-size:14px}section p{margin-bottom:15px}.translation+p{margin-top:30px}</style></head><body><main><a class="inline-link" href="../../#film">← Back to CXBench</a><p class="eyebrow" style="margin-top:40px">FILM TRANSCRIPT / EN + 中文</p><h1>Follow the whole path.</h1><p>An original animated introduction to CXBench. English narration with English and Chinese captions.</p><section><p class="eyebrow">01 / 00:00:00</p><h2>The destination is only half the story</h2><p>Imagine two AI agents helping a customer dispute a transaction.</p><p lang="zh" class="translation">设想两个 AI 智能体，正在帮助客户对一笔交易提出争议。</p><p>Both file the correct dispute. Their final database records are identical.</p><p lang="zh" class="translation">它们都正确提交了争议，最终的数据库记录完全相同。</p><p>Does that mean both agents succeeded? The answer depends on the path they took.</p><p lang="zh" class="translation">这是否意味着它们都成功了？答案取决于它们采取的过程。</p></section><section><p class="eyebrow">02 / 00:00:14</p><h2>Same outcome. Different process.</h2><p>In this example, the bank requires written confirmation of an oral error notice.</p><p lang="zh" class="translation">在这个例子中，银行要求客户书面确认口头提出的错误通知。</p><p>One agent explains the requirement and gives the submission address. The other omits that notice.</p><p lang="zh" class="translation">一个智能体解释了这一要求，并提供提交地址；另一个却省略了这项告知。</p><p>Both obtain draft confirmation. Both reach the same outcome. But only one satisfies the required disclosure.</p><p lang="zh" class="translation">它们都获得草稿确认，也得到相同结果，但只有一个履行了必要的披露义务。</p></section><section><p class="eyebrow">03 / 00:00:34</p><h2>Separate outcome from process</h2><p>CXBench separates two questions. Did the agent achieve the customer goal? And did it follow the required process?</p><p lang="zh" class="translation">CXBench 区分两个问题：智能体是否实现客户目标？是否遵循必要流程？</p><p>Overall success requires both. A correct outcome with a failed process is a false-pass.</p><p lang="zh" class="translation">整体成功要求两者同时通过。结果正确、流程失败，就是一次 false-pass，即假通过。</p><p>It is precisely the kind of failure that outcome-only evaluation would accept.</p><p lang="zh" class="translation">这种失败恰好会被只检查最终结果的评估方式判为成功。</p></section><section><p class="eyebrow">04 / 00:00:53</p><h2>Make every requirement inspectable</h2><p>Rule cards connect source provisions to applicable behavior and observable trace evidence.</p><p lang="zh" class="translation">规则卡将来源条款、适用行为和交互轨迹中的可观察证据连接起来。</p><p>Deterministic rules check ordering and authority. An LLM judge checks semantic obligations, such as disclosures and unsupported promises.</p><p lang="zh" class="translation">确定性规则检查时序和权限；大模型裁判检查披露、无依据承诺等语义要求。</p><p>The process passes only when both components pass. Each finding can be inspected against the recorded interaction.</p><p lang="zh" class="translation">两个评分组件都通过，流程才通过。每项判断都可以对照交互记录检查。</p></section><section><p class="eyebrow">05 / 00:01:17</p><h2>Separate preparation from authority</h2><p>In the default runtime, the agent prepares a draft. The customer confirms the required fields.</p><p lang="zh" class="translation">默认运行模式下，智能体准备草稿，客户确认必要字段。</p><p>The runtime submits only when the draft still matches that confirmation. This is a benchmark control, distinct from the disclosure obligation.</p><p lang="zh" class="translation">只有草稿仍与确认内容一致，运行时才会提交。这是基准的控制机制，与披露义务不同。</p><p>Controlling submission helps enforce selected constraints. It does not replace evaluation of the whole process.</p><p lang="zh" class="translation">控制提交权限有助于落实特定约束，但不能替代对整个流程的评估。</p></section><section><p class="eyebrow">06 / 00:01:40</p><h2>The gap becomes visible</h2><p>The study covers one hundred and twenty tasks, six regulated domains, and seven models: eight hundred and forty retained executions.</p><p lang="zh" class="translation">研究覆盖 120 个任务、6 个受监管领域、7 个模型，共保留 840 次执行记录。</p><p>Five hundred and eighty-two pass the outcome check. Only one hundred and sixteen pass both outcome and process.</p><p lang="zh" class="translation">其中 582 次通过结果检查，只有 116 次同时通过结果和流程检查。</p><p>The remaining four hundred and sixty-six are false-passes. That is about eighty percent of the runs that outcome-only scoring accepts.</p><p lang="zh" class="translation">其余 466 次是假通过，约占结果评估判为成功的执行记录的百分之八十。</p></section><section><p class="eyebrow">07 / 00:02:04</p><h2>A different criterion changes the picture</h2><p>The evaluation criterion also changes the observed model ordering.</p><p lang="zh" class="translation">评估标准也会改变观察到的模型排序。</p><p>DeepSeek and GLM tie on outcome success, yet their both-pass rates differ. GPT five point four has a lower outcome rate, but a higher both-pass rate than DeepSeek.</p><p lang="zh" class="translation">DeepSeek 和 GLM 的结果通过率相同，但双通过率不同。GPT 5.4 的结果通过率较低，双通过率却高于 DeepSeek。</p><p>These are descriptive comparisons. The study does not establish a complete statistical ranking.</p><p lang="zh" class="translation">这些是描述性比较；研究并未确立完整且具有统计显著性的排序。</p></section><section><p class="eyebrow">08 / 00:02:26</p><h2>Evaluate the outcome. Examine the process.</h2><p>Among the false-passes, the semantic judge alone catches three hundred and twenty-nine. Hard rules alone catch thirty-eight. Both catch ninety-nine.</p><p lang="zh" class="translation">在假通过中，语义裁判单独识别 329 次，确定性规则单独识别 38 次，两者共同识别 99 次。</p><p>These complementary checks measure the requirements encoded in the benchmark, not legal certification. Judge validation and repeated-run uncertainty remain important limits.</p><p lang="zh" class="translation">这些互补检查衡量基准中编码的要求，而不提供法律认证。裁判验证和重复运行的不确定性仍是重要限制。</p><p>CXBench asks us to evaluate the outcome, and examine the process. Explore the paper at cxbench dot github dot io.</p><p lang="zh" class="translation">CXBench 提醒我们：评估结果，也审视过程。欢迎访问 cxbench.github.io 阅读论文。</p></section><p class="footnote">Figures and claims follow the supplied October 2026 manuscript. Narration is synthesized with the Andrew neural voice. The animation uses original geometric graphics; no 3Blue1Brown artwork, recordings, or voice are used.</p></main></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CXBench — Film transcript</title>
+    <link rel="stylesheet" href="../fonts/fonts.css" />
+    <link rel="stylesheet" href="../../style.css" />
+    <style>
+      main {
+        max-width: 850px;
+        padding: 60px 24px;
+        margin: auto;
+      }
+      section {
+        padding: 35px 0;
+        border-top: 1px solid var(--line);
+      }
+      h1 {
+        font-size: 64px;
+      }
+      h2 {
+        font-size: 38px;
+      }
+      .translation {
+        color: var(--muted);
+        font-size: 14px;
+      }
+      section p {
+        margin-bottom: 15px;
+      }
+      .translation + p {
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="inline-link" href="../../#film">← Back to CXBench</a>
+      <p class="eyebrow" style="margin-top: 40px">
+        FILM TRANSCRIPT / EN + 中文
+      </p>
+      <h1>Follow the whole path.</h1>
+      <p>
+        An original animated introduction to CXBench. English narration with
+        English and Chinese captions.
+      </p>
+      <section>
+        <p class="eyebrow">01 / 00:00:00</p>
+        <h2>The destination is only half the story</h2>
+        <p>Imagine two AI agents helping a customer dispute a transaction.</p>
+        <p lang="zh" class="translation">
+          设想两个 AI 智能体，正在帮助客户对一笔交易提出争议。
+        </p>
+        <p>
+          Both file the correct dispute. Their final database records are
+          identical.
+        </p>
+        <p lang="zh" class="translation">
+          它们都正确提交了争议，最终的数据库记录完全相同。
+        </p>
+        <p>
+          Does that mean both agents succeeded? The answer depends on the path
+          they took.
+        </p>
+        <p lang="zh" class="translation">
+          这是否意味着它们都成功了？答案取决于它们采取的过程。
+        </p>
+      </section>
+      <section>
+        <p class="eyebrow">02 / 00:00:14</p>
+        <h2>Same outcome. Different process.</h2>
+        <p>
+          In this example, the bank requires written confirmation of an oral
+          error notice.
+        </p>
+        <p lang="zh" class="translation">
+          在这个例子中，银行要求客户书面确认口头提出的错误通知。
+        </p>
+        <p>
+          One agent explains the requirement and gives the submission address.
+          The other omits that notice.
+        </p>
+        <p lang="zh" class="translation">
+          一个智能体解释了这一要求，并提供提交地址；另一个却省略了这项告知。
+        </p>
+        <p>
+          Both obtain draft confirmation. Both reach the same outcome. But only
+          one satisfies the required disclosure.
+        </p>
+        <p lang="zh" class="translation">
+          它们都获得草稿确认，也得到相同结果，但只有一个履行了必要的披露义务。
+        </p>
+      </section>
+      <section>
+        <p class="eyebrow">03 / 00:00:34</p>
+        <h2>Separate outcome from process</h2>
+        <p>
+          CXBench separates two questions. Did the agent achieve the customer
+          goal? And did it follow the required process?
+        </p>
+        <p lang="zh" class="translation">
+          CXBench 区分两个问题：智能体是否实现客户目标？是否遵循必要流程？
+        </p>
+        <p>
+          Overall success requires both. A correct outcome with a failed process
+          is a false-pass.
+        </p>
+        <p lang="zh" class="translation">
+          整体成功要求两者同时通过。结果正确、流程失败，就是一次
+          false-pass，即假通过。
+        </p>
+        <p>
+          It is precisely the kind of failure that outcome-only evaluation would
+          accept.
+        </p>
+        <p lang="zh" class="translation">
+          这种失败恰好会被只检查最终结果的评估方式判为成功。
+        </p>
+      </section>
+      <section>
+        <p class="eyebrow">04 / 00:00:53</p>
+        <h2>Make every requirement inspectable</h2>
+        <p>
+          Rule cards connect source provisions to applicable behavior and
+          observable trace evidence.
+        </p>
+        <p lang="zh" class="translation">
+          规则卡将来源条款、适用行为和交互轨迹中的可观察证据连接起来。
+        </p>
+        <p>
+          Deterministic rules check ordering and authority. An LLM judge checks
+          semantic obligations, such as disclosures and unsupported promises.
+        </p>
+        <p lang="zh" class="translation">
+          确定性规则检查时序和权限；大模型裁判检查披露、无依据承诺等语义要求。
+        </p>
+        <p>
+          The process passes only when both components pass. Each finding can be
+          inspected against the recorded interaction.
+        </p>
+        <p lang="zh" class="translation">
+          两个评分组件都通过，流程才通过。每项判断都可以对照交互记录检查。
+        </p>
+      </section>
+      <section>
+        <p class="eyebrow">05 / 00:01:17</p>
+        <h2>Separate preparation from authority</h2>
+        <p>
+          In the default runtime, the agent prepares a draft. The customer
+          confirms the required fields.
+        </p>
+        <p lang="zh" class="translation">
+          默认运行模式下，智能体准备草稿，客户确认必要字段。
+        </p>
+        <p>
+          The runtime submits only when the draft still matches that
+          confirmation. This is a benchmark control, distinct from the
+          disclosure obligation.
+        </p>
+        <p lang="zh" class="translation">
+          只有草稿仍与确认内容一致，运行时才会提交。这是基准的控制机制，与披露义务不同。
+        </p>
+        <p>
+          Controlling submission helps enforce selected constraints. It does not
+          replace evaluation of the whole process.
+        </p>
+        <p lang="zh" class="translation">
+          控制提交权限有助于落实特定约束，但不能替代对整个流程的评估。
+        </p>
+      </section>
+      <section>
+        <p class="eyebrow">06 / 00:01:40</p>
+        <h2>The gap becomes visible</h2>
+        <p>
+          The study covers one hundred and twenty tasks, six regulated domains,
+          and seven models: eight hundred and forty retained executions.
+        </p>
+        <p lang="zh" class="translation">
+          研究覆盖 120 个任务、6 个受监管领域、7 个模型，共保留 840 次执行记录。
+        </p>
+        <p>
+          Five hundred and eighty-two pass the outcome check. Only one hundred
+          and sixteen pass both outcome and process.
+        </p>
+        <p lang="zh" class="translation">
+          其中 582 次通过结果检查，只有 116 次同时通过结果和流程检查。
+        </p>
+        <p>
+          The remaining four hundred and sixty-six are false-passes. That is
+          about eighty percent of the runs that outcome-only scoring accepts.
+        </p>
+        <p lang="zh" class="translation">
+          其余 466 次是假通过，约占结果评估判为成功的执行记录的百分之八十。
+        </p>
+      </section>
+      <section>
+        <p class="eyebrow">07 / 00:02:04</p>
+        <h2>A different criterion changes the picture</h2>
+        <p>
+          The evaluation criterion also changes the observed model ordering.
+        </p>
+        <p lang="zh" class="translation">评估标准也会改变观察到的模型排序。</p>
+        <p>
+          DeepSeek and GLM tie on outcome success, yet their both-pass rates
+          differ. GPT five point four has a lower outcome rate, but a higher
+          both-pass rate than DeepSeek.
+        </p>
+        <p lang="zh" class="translation">
+          DeepSeek 和 GLM 的结果通过率相同，但双通过率不同。GPT 5.4
+          的结果通过率较低，双通过率却高于 DeepSeek。
+        </p>
+        <p>
+          These are descriptive comparisons. The study does not establish a
+          complete statistical ranking.
+        </p>
+        <p lang="zh" class="translation">
+          这些是描述性比较；研究并未确立完整且具有统计显著性的排序。
+        </p>
+      </section>
+      <section>
+        <p class="eyebrow">08 / 00:02:26</p>
+        <h2>Evaluate the outcome. Examine the process.</h2>
+        <p>
+          Among the false-passes, the semantic judge alone catches three hundred
+          and twenty-nine. Hard rules alone catch thirty-eight. Both catch
+          ninety-nine.
+        </p>
+        <p lang="zh" class="translation">
+          在假通过中，语义裁判单独识别 329 次，确定性规则单独识别 38
+          次，两者共同识别 99 次。
+        </p>
+        <p>
+          These complementary checks measure the requirements encoded in the
+          benchmark, not legal certification. Judge validation and repeated-run
+          uncertainty remain important limits.
+        </p>
+        <p lang="zh" class="translation">
+          这些互补检查衡量基准中编码的要求，而不提供法律认证。裁判验证和重复运行的不确定性仍是重要限制。
+        </p>
+        <p>
+          CXBench asks us to evaluate the outcome, and examine the process.
+          Explore the paper at cxbench dot github dot io.
+        </p>
+        <p lang="zh" class="translation">
+          CXBench 提醒我们：评估结果，也审视过程。欢迎访问 cxbench.github.io
+          阅读论文。
+        </p>
+      </section>
+      <p class="footnote">
+        Figures and claims follow the supplied October 2026 manuscript.
+        Narration is synthesized with the Andrew neural voice. The animation
+        uses original geometric graphics; no 3Blue1Brown artwork, recordings, or
+        voice are used.
+      </p>
+    </main>
+  </body>
+</html>

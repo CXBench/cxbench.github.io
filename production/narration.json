@@ -1,42 +1,146 @@
 [
-  {"id":"question","title":"The destination is only half the story","lines":[
-    ["Imagine two AI agents helping a customer dispute a transaction.","设想两个 AI 智能体，正在帮助客户对一笔交易提出争议。"],
-    ["Both file the correct dispute. Their final database records are identical.","它们都正确提交了争议，最终的数据库记录完全相同。"],
-    ["Does that mean both agents succeeded? The answer depends on the path they took.","这是否意味着它们都成功了？答案取决于它们采取的过程。"]
-  ]},
-  {"id":"traces","title":"Same outcome. Different process.","lines":[
-    ["In this example, the bank requires written confirmation of an oral error notice.","在这个例子中，银行要求客户书面确认口头提出的错误通知。"],
-    ["One agent explains the requirement and gives the submission address. The other omits that notice.","一个智能体解释了这一要求，并提供提交地址；另一个却省略了这项告知。"],
-    ["Both obtain draft confirmation. Both reach the same outcome. But only one satisfies the required disclosure.","它们都获得草稿确认，也得到相同结果，但只有一个履行了必要的披露义务。"]
-  ]},
-  {"id":"axes","title":"Separate outcome from process","lines":[
-    ["CXBench separates two questions. Did the agent achieve the customer goal? And did it follow the required process?","CXBench 区分两个问题：智能体是否实现客户目标？是否遵循必要流程？"],
-    ["Overall success requires both. A correct outcome with a failed process is a false-pass.","整体成功要求两者同时通过。结果正确、流程失败，就是一次 false-pass，即假通过。"],
-    ["It is precisely the kind of failure that outcome-only evaluation would accept.","这种失败恰好会被只检查最终结果的评估方式判为成功。"]
-  ]},
-  {"id":"grader","title":"Make every requirement inspectable","lines":[
-    ["Rule cards connect source provisions to applicable behavior and observable trace evidence.","规则卡将来源条款、适用行为和交互轨迹中的可观察证据连接起来。"],
-    ["Deterministic rules check ordering and authority. An LLM judge checks semantic obligations, such as disclosures and unsupported promises.","确定性规则检查时序和权限；大模型裁判检查披露、无依据承诺等语义要求。"],
-    ["The process passes only when both components pass. Each finding can be inspected against the recorded interaction.","两个评分组件都通过，流程才通过。每项判断都可以对照交互记录检查。"]
-  ]},
-  {"id":"runtime","title":"Separate preparation from authority","lines":[
-    ["In the default runtime, the agent prepares a draft. The customer confirms the required fields.","默认运行模式下，智能体准备草稿，客户确认必要字段。"],
-    ["The runtime submits only when the draft still matches that confirmation. This is a benchmark control, distinct from the disclosure obligation.","只有草稿仍与确认内容一致，运行时才会提交。这是基准的控制机制，与披露义务不同。"],
-    ["Controlling submission helps enforce selected constraints. It does not replace evaluation of the whole process.","控制提交权限有助于落实特定约束，但不能替代对整个流程的评估。"]
-  ]},
-  {"id":"results","title":"The gap becomes visible","lines":[
-    ["The study covers one hundred and twenty tasks, six regulated domains, and seven models: eight hundred and forty retained executions.","研究覆盖 120 个任务、6 个受监管领域、7 个模型，共保留 840 次执行记录。"],
-    ["Five hundred and eighty-two pass the outcome check. Only one hundred and sixteen pass both outcome and process.","其中 582 次通过结果检查，只有 116 次同时通过结果和流程检查。"],
-    ["The remaining four hundred and sixty-six are false-passes. That is about eighty percent of the runs that outcome-only scoring accepts.","其余 466 次是假通过，约占结果评估判为成功的执行记录的百分之八十。"]
-  ]},
-  {"id":"models","title":"A different criterion changes the picture","lines":[
-    ["The evaluation criterion also changes the observed model ordering.","评估标准也会改变观察到的模型排序。"],
-    ["DeepSeek and GLM tie on outcome success, yet their both-pass rates differ. GPT five point four has a lower outcome rate, but a higher both-pass rate than DeepSeek.","DeepSeek 和 GLM 的结果通过率相同，但双通过率不同。GPT 5.4 的结果通过率较低，双通过率却高于 DeepSeek。"],
-    ["These are descriptive comparisons. The study does not establish a complete statistical ranking.","这些是描述性比较；研究并未确立完整且具有统计显著性的排序。"]
-  ]},
-  {"id":"closing","title":"Evaluate the outcome. Examine the process.","lines":[
-    ["Among the false-passes, the semantic judge alone catches three hundred and twenty-nine. Hard rules alone catch thirty-eight. Both catch ninety-nine.","在假通过中，语义裁判单独识别 329 次，确定性规则单独识别 38 次，两者共同识别 99 次。"],
-    ["These complementary checks measure the requirements encoded in the benchmark, not legal certification. Judge validation and repeated-run uncertainty remain important limits.","这些互补检查衡量基准中编码的要求，而不提供法律认证。裁判验证和重复运行的不确定性仍是重要限制。"],
-    ["CXBench asks us to evaluate the outcome, and examine the process. Explore the paper at cxbench dot github dot io.","CXBench 提醒我们：评估结果，也审视过程。欢迎访问 cxbench.github.io 阅读论文。"]
-  ]}
+  {
+    "id": "question",
+    "title": "The destination is only half the story",
+    "lines": [
+      [
+        "Imagine two AI agents helping a customer dispute a transaction.",
+        "设想两个 AI 智能体，正在帮助客户对一笔交易提出争议。"
+      ],
+      [
+        "Both file the correct dispute. Their final database records are identical.",
+        "它们都正确提交了争议，最终的数据库记录完全相同。"
+      ],
+      [
+        "Does that mean both agents succeeded? The answer depends on the path they took.",
+        "这是否意味着它们都成功了？答案取决于它们采取的过程。"
+      ]
+    ]
+  },
+  {
+    "id": "traces",
+    "title": "Same outcome. Different process.",
+    "lines": [
+      [
+        "In this example, the bank requires written confirmation of an oral error notice.",
+        "在这个例子中，银行要求客户书面确认口头提出的错误通知。"
+      ],
+      [
+        "One agent explains the requirement and gives the submission address. The other omits that notice.",
+        "一个智能体解释了这一要求，并提供提交地址；另一个却省略了这项告知。"
+      ],
+      [
+        "Both obtain draft confirmation. Both reach the same outcome. But only one satisfies the required disclosure.",
+        "它们都获得草稿确认，也得到相同结果，但只有一个履行了必要的披露义务。"
+      ]
+    ]
+  },
+  {
+    "id": "axes",
+    "title": "Separate outcome from process",
+    "lines": [
+      [
+        "CXBench separates two questions. Did the agent achieve the customer goal? And did it follow the required process?",
+        "CXBench 区分两个问题：智能体是否实现客户目标？是否遵循必要流程？"
+      ],
+      [
+        "Overall success requires both. A correct outcome with a failed process is a false-pass.",
+        "整体成功要求两者同时通过。结果正确、流程失败，就是一次 false-pass，即假通过。"
+      ],
+      [
+        "It is precisely the kind of failure that outcome-only evaluation would accept.",
+        "这种失败恰好会被只检查最终结果的评估方式判为成功。"
+      ]
+    ]
+  },
+  {
+    "id": "grader",
+    "title": "Make every requirement inspectable",
+    "lines": [
+      [
+        "Rule cards connect source provisions to applicable behavior and observable trace evidence.",
+        "规则卡将来源条款、适用行为和交互轨迹中的可观察证据连接起来。"
+      ],
+      [
+        "Deterministic rules check ordering and authority. An LLM judge checks semantic obligations, such as disclosures and unsupported promises.",
+        "确定性规则检查时序和权限；大模型裁判检查披露、无依据承诺等语义要求。"
+      ],
+      [
+        "The process passes only when both components pass. Each finding can be inspected against the recorded interaction.",
+        "两个评分组件都通过，流程才通过。每项判断都可以对照交互记录检查。"
+      ]
+    ]
+  },
+  {
+    "id": "runtime",
+    "title": "Separate preparation from authority",
+    "lines": [
+      [
+        "In the default runtime, the agent prepares a draft. The customer confirms the required fields.",
+        "默认运行模式下，智能体准备草稿，客户确认必要字段。"
+      ],
+      [
+        "The runtime submits only when the draft still matches that confirmation. This is a benchmark control, distinct from the disclosure obligation.",
+        "只有草稿仍与确认内容一致，运行时才会提交。这是基准的控制机制，与披露义务不同。"
+      ],
+      [
+        "Controlling submission helps enforce selected constraints. It does not replace evaluation of the whole process.",
+        "控制提交权限有助于落实特定约束，但不能替代对整个流程的评估。"
+      ]
+    ]
+  },
+  {
+    "id": "results",
+    "title": "The gap becomes visible",
+    "lines": [
+      [
+        "The study covers one hundred and twenty tasks, six regulated domains, and seven models: eight hundred and forty retained executions.",
+        "研究覆盖 120 个任务、6 个受监管领域、7 个模型，共保留 840 次执行记录。"
+      ],
+      [
+        "Five hundred and eighty-two pass the outcome check. Only one hundred and sixteen pass both outcome and process.",
+        "其中 582 次通过结果检查，只有 116 次同时通过结果和流程检查。"
+      ],
+      [
+        "The remaining four hundred and sixty-six are false-passes. That is about eighty percent of the runs that outcome-only scoring accepts.",
+        "其余 466 次是假通过，约占结果评估判为成功的执行记录的百分之八十。"
+      ]
+    ]
+  },
+  {
+    "id": "models",
+    "title": "A different criterion changes the picture",
+    "lines": [
+      [
+        "The evaluation criterion also changes the observed model ordering.",
+        "评估标准也会改变观察到的模型排序。"
+      ],
+      [
+        "DeepSeek and GLM tie on outcome success, yet their both-pass rates differ. GPT five point four has a lower outcome rate, but a higher both-pass rate than DeepSeek.",
+        "DeepSeek 和 GLM 的结果通过率相同，但双通过率不同。GPT 5.4 的结果通过率较低，双通过率却高于 DeepSeek。"
+      ],
+      [
+        "These are descriptive comparisons. The study does not establish a complete statistical ranking.",
+        "这些是描述性比较；研究并未确立完整且具有统计显著性的排序。"
+      ]
+    ]
+  },
+  {
+    "id": "closing",
+    "title": "Evaluate the outcome. Examine the process.",
+    "lines": [
+      [
+        "Among the false-passes, the semantic judge alone catches three hundred and twenty-nine. Hard rules alone catch thirty-eight. Both catch ninety-nine.",
+        "在假通过中，语义裁判单独识别 329 次，确定性规则单独识别 38 次，两者共同识别 99 次。"
+      ],
+      [
+        "These complementary checks measure the requirements encoded in the benchmark, not legal certification. Judge validation and repeated-run uncertainty remain important limits.",
+        "这些互补检查衡量基准中编码的要求，而不提供法律认证。裁判验证和重复运行的不确定性仍是重要限制。"
+      ],
+      [
+        "CXBench asks us to evaluate the outcome, and examine the process. Explore the paper at cxbench dot github dot io.",
+        "CXBench 提醒我们：评估结果，也审视过程。欢迎访问 cxbench.github.io 阅读论文。"
+      ]
+    ]
+  }
 ]
