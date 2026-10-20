@@ -12,8 +12,10 @@ Research details cover task information boundaries, rule-card construction,
 registered tool counts, submission authority, hybrid verdict composition,
 experimental retention policy, per-domain results, an annotated recorded
 insurance trace, sensitivity analyses, reproduction procedures, and domain
-extension. Section and appendix links point into the current supplied PDF;
-`production/content-sources.json` records the source pages for these additions.
+extension. Paper, section, and appendix links point to
+[arXiv:2610.25954](https://arxiv.org/pdf/2610.25954), with page references checked
+against v1. `production/content-sources.json` records the local source pages
+used to prepare these additions.
 
 ## Content provenance
 
@@ -34,8 +36,10 @@ extension. Section and appendix links point into the current supplied PDF;
   diagnostic views, not formal benchmark scores.
 - `assets/data/results.json` records counts, denominators, intervals,
   sensitivity results, and provenance. No experiments were rerun for this site.
-- Author names and BibTeX follow the current supplied PDF. The website makes
-  no claim about venue acceptance or an assigned arXiv identifier.
+- Author names and BibTeX metadata follow
+  [arXiv:2610.25954](https://arxiv.org/abs/2610.25954). The website makes no claim
+  about venue acceptance. The supplied PDF is retained as the local source
+  artifact for figure and data provenance.
 - The benchmark code links point to [CXBench/cxbench](https://github.com/CXBench/cxbench).
   Implementation and raw traces are not included in this website repository.
 
